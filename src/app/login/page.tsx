@@ -1,6 +1,6 @@
 "use client";
 
-import { loginWithEmail, logOut } from "@/firebase";
+import { loginWithEmail, loginWithGoogle, logOut } from "@/firebase";
 import { useRef } from "react";
 
 const LoginPage = () => {
@@ -19,6 +19,7 @@ const LoginPage = () => {
         Login
       </button>
       <button onClick={logOut}>LogOut</button>
+      <button onClick={loginWithGoogle}>Google</button>
     </div>
   );
 };

@@ -6,7 +6,7 @@ export const loginWithEmail = async (
   email: MutableRefObject<HTMLInputElement | null>,
   password: MutableRefObject<HTMLInputElement | null>
 ) => {
-  signInWithEmailAndPassword(
+  await signInWithEmailAndPassword(
     auth,
     email.current!.value,
     password.current!.value
