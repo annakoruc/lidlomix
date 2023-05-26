@@ -1,16 +1,24 @@
-import React from "react";
+"use client";
+
+import { loginWithEmail } from "@/firebase";
+import { useRef } from "react";
 
 const LoginPage = () => {
+  const loginEmail = useRef<HTMLInputElement>(null);
+  const loginPassword = useRef<HTMLInputElement>(null);
+
   return (
-    <form>
+    <div>
       <label>
-        email: <input />
+        email: <input ref={loginEmail} />
       </label>
       <label>
-        password: <input />
+        password: <input ref={loginPassword} />
       </label>
-      <button>Login</button>
-    </form>
+      <button onClick={() => loginWithEmail(loginEmail, loginPassword)}>
+        Login
+      </button>
+    </div>
   );
 };
 

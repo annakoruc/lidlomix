@@ -6,14 +6,16 @@ export const signUpWithEmail = async (
   registerEmail: MutableRefObject<HTMLInputElement | null>,
   registerPassword: MutableRefObject<HTMLInputElement | null>
 ) => {
-  try {
-    const user = await createUserWithEmailAndPassword(
-      auth,
-      registerEmail.current!.value,
-      registerPassword.current!.value
-    );
-    console.log(user);
-  } catch (error: any) {
-    console.log(error.message);
-  }
+  await createUserWithEmailAndPassword(
+    auth,
+    registerEmail.current!.value,
+    registerPassword.current!.value
+  )
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log("User sign Up" + user);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
 };
