@@ -8,7 +8,7 @@ export const getRecipeByName = (search: string) => {
       prefix: search,
     },
     headers: {
-      "X-RapidAPI-Key": "d44df5084amshc164abfeabc66ebp100f9djsn8cf6d7f559ca",
+      "X-RapidAPI-Key": process.env.NEXT_PUBLIC_TASTY_API_KEY,
       "X-RapidAPI-Host": "tasty.p.rapidapi.com",
     },
   };
