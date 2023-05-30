@@ -3,6 +3,7 @@
 import { getRepiceById } from "@/axios/getRecipeById";
 import { getRecipeByName } from "@/axios/getRecipeByName";
 import { loginWithEmail, loginWithGoogle, logOut } from "@/firebase/auth";
+import { getLoggedUser } from "@/firebase/auth/getLoggedUser";
 import { addToUserFavorites } from "@/firebase/database";
 import { getDatabase } from "@/firebase/database/getDataBase";
 import { useEffect, useRef } from "react";
@@ -15,6 +16,8 @@ const LoginPage = () => {
     getRecipeByName("butter");
     getRepiceById("8138");
     getDatabase();
+    addToUserFavorites();
+    getLoggedUser();
   });
 
   return (
