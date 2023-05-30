@@ -1,11 +1,21 @@
 "use client";
 
-import { loginWithEmail, loginWithGoogle, logOut } from "@/firebase";
-import { useRef } from "react";
+import { getRepiceById } from "@/axios/getRecipeById";
+import { getRecipeByName } from "@/axios/getRecipeByName";
+import { loginWithEmail, loginWithGoogle, logOut } from "@/firebase/auth";
+import { addToUserFavorites } from "@/firebase/database";
+import { getDatabase } from "@/firebase/database/getDataBase";
+import { useEffect, useRef } from "react";
 
 const LoginPage = () => {
   const loginEmail = useRef<HTMLInputElement>(null);
   const loginPassword = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    getRecipeByName("butter");
+    getRepiceById("8138");
+    getDatabase();
+  });
 
   return (
     <div>

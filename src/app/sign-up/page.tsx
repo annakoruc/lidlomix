@@ -1,6 +1,6 @@
 "use client";
 
-import { signUpWithEmail } from "@/firebase";
+import { signUpWithEmail } from "@/firebase/auth";
 import React, { useRef } from "react";
 
 export default function SignUpPage() {
