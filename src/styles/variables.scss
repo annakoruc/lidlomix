@@ -8,6 +8,10 @@ $c-white: "#FFFFFF";
 $c-orange: "#F28400";
 $c-yellow: "#F9B600";
 
-$c-gradient-background: linear-gradient(180deg, #0c3048 0%, #96cae7 100%);
-$c-gradient-logo: linear-gradient(180deg, #96cae7 0%, #0c3048 100%);
-$c-gradient-orange: linear-gradient(180deg, #f28400 0%, #ffe293 100%);
+$c-gradient-background: linear-gradient(
+  180deg,
+  $c-darkblue 0%,
+  $c-lightblue 100%
+);
+$c-gradient-logo: linear-gradient(180deg, $c-lightblue 0%, $c-darkblue 100%);
+$c-gradient-orange: linear-gradient(180deg, $c-orange 0%, $c-yellow 100%);
