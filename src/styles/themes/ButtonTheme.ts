@@ -28,7 +28,13 @@ export const buttonTheme = createTheme({
           props: { variant: "contained" },
           style: { color: themeVariables.colors["white"] },
         },
-        { props: { variant: "outlined" }, style: { border: "1px solid" } },
+        {
+          props: { variant: "outlined" },
+          style: {
+            border: "1px solid",
+            background: themeVariables.colors["white"],
+          },
+        },
       ],
     },
   },

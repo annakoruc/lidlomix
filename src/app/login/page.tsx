@@ -8,6 +8,8 @@ import { addToUserFavorites } from "@/firebase/database";
 import { getDatabase } from "@/firebase/database/getDataBase";
 import { useEffect, useRef } from "react";
 
+import "./loginPage.scss";
+
 const LoginPage = () => {
   const loginEmail = useRef<HTMLInputElement>(null);
   const loginPassword = useRef<HTMLInputElement>(null);
@@ -21,7 +23,7 @@ const LoginPage = () => {
   });
 
   return (
-    <div>
+    <div className="login_page">
       <label>
         email: <input ref={loginEmail} />
       </label>
