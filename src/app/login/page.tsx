@@ -9,32 +9,47 @@ import { getDatabase } from "@/firebase/database/getDataBase";
 import { useEffect, useRef } from "react";
 
 import "./loginPage.scss";
+import { InputComponent, NavigateButton } from "@/components/UI";
+import { Footer } from "@/components";
+import { IconEmailSvg, IconPasswordSvg } from "@/assets";
+import { FormControl } from "@mui/material";
+import LogoSvg from "@/assets/LogoSvg";
 
 const LoginPage = () => {
   const loginEmail = useRef<HTMLInputElement>(null);
   const loginPassword = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    getRecipeByName("butter");
-    getRepiceById("8138");
-    getDatabase();
-    addToUserFavorites();
-    getLoggedUser();
-  });
+  // useEffect(() => {
+  //   getRecipeByName("butter");
+  //   getRepiceById("8138");
+  //   getDatabase();
+  //   addToUserFavorites();
+  //   getLoggedUser();
+  // });
 
   return (
     <div className="login_page">
+      <LogoSvg color="#0c3048" />
       <label>
-        email: <input ref={loginEmail} />
+        <InputComponent
+          placeholder="Your email"
+          icon={<IconEmailSvg color={"black"} />}
+          ref={loginEmail}
+          required
+        />
+        <InputComponent
+          placeholder="Password"
+          icon={<IconPasswordSvg color={"black"} />}
+          ref={loginPassword}
+          required
+        />
       </label>
-      <label>
-        password: <input ref={loginPassword} />
-      </label>
-      <button onClick={() => loginWithEmail(loginEmail, loginPassword)}>
-        Login
-      </button>
-      <button onClick={logOut}>LogOut</button>
-      <button onClick={loginWithGoogle}>Google</button>
+      <NavigateButton
+        variant="contained"
+        title="Login"
+        onClick={() => loginWithEmail(loginEmail, loginPassword)}
+      />
+      <Footer />
     </div>
   );
 };
