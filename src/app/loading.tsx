@@ -1,14 +1,14 @@
 "use client";
 
 import LogoSvg from "@/assets/LogoSvg";
-// import { Footer } from "@/components";
+import { BoxFlexComponent } from "@/components/UI";
+import { Box } from "@mui/material";
 import React from "react";
-import "./pageStyle.scss";
 import { Rings } from "react-loader-spinner";
 
 const Loading = () => {
   return (
-    <main className="main_page">
+    <BoxFlexComponent>
       <LogoSvg color="white" />
       <Rings
         height="80"
@@ -20,7 +20,7 @@ const Loading = () => {
         visible={true}
         ariaLabel="rings-loading"
       />
-    </main>
+    </BoxFlexComponent>
   );
 };
 
