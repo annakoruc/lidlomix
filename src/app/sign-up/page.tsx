@@ -1,6 +1,7 @@
 "use client";
 
-import { signUpWithEmail } from "@/firebase";
+import { BoxFlexComponent } from "@/components/UI";
+import { signUpWithEmail } from "@/firebase/auth";
 import React, { useRef } from "react";
 
 export default function SignUpPage() {
@@ -8,7 +9,7 @@ export default function SignUpPage() {
   const registerPassword = useRef<HTMLInputElement>(null);
 
   return (
-    <div>
+    <BoxFlexComponent>
       <label>
         email: <input ref={registerEmail} />
       </label>
@@ -25,6 +26,6 @@ export default function SignUpPage() {
       >
         Login
       </button>
-    </div>
+    </BoxFlexComponent>
   );
 }

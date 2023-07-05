@@ -1,12 +1,18 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import Link from "next/link";
+"use client";
+
+import { BoxFlexComponent, NavigateButton } from "@/components/UI";
+
+import LogoSvg from "@/assets/LogoSvg";
+import { Box } from "@mui/material";
 
 export default function Home() {
   return (
-    <main>
-      <Link href={"/login"}>Login</Link>
-      <Link href={"/sign-up"}>Sign Up</Link>
-    </main>
+    <BoxFlexComponent>
+      <LogoSvg />
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
+        <NavigateButton href={"/login"} title="Login" variant="contained" />
+        <NavigateButton href={"/sign-up"} title="Sign Up" variant="outlined" />
+      </Box>
+    </BoxFlexComponent>
   );
 }
