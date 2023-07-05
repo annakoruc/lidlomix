@@ -7,7 +7,7 @@ export const buttonTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          fontFamily: themeVariables.fonts["mavenPro"],
+          // fontFamily: themeVariables.fonts["mavenPro"],
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
           fontWeight: "400",
           textTransform: "capitalize",

@@ -1,7 +1,5 @@
-import { Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import Link from "@mui/material/Link";
-
-import "./footerstyle.scss";
 
 export const Footer = () => {
   return (
@@ -9,8 +7,9 @@ export const Footer = () => {
       variant="caption"
       display="block"
       gutterBottom
-      style={{
+      sx={{
         width: "100%",
+
         position: "absolute",
         bottom: 0,
         textAlign: "center",
