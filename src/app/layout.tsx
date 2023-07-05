@@ -1,4 +1,9 @@
-import "../styles/global.scss";
+"use client";
+
+import { GlobalTheme } from "@/styles/themes/GlobalTheme";
+import { Footer } from "@/components";
+import { Container, GlobalStyles } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 
 export const metadata = {
   title: "Create Next App",
@@ -12,7 +17,27 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThemeProvider theme={GlobalTheme}>
+          <GlobalStyles
+            styles={(theme) => ({
+              "*": {
+                margin: 0,
+                padding: 0,
+                boxSizing: "border-box",
+              },
+              body: {
+                height: "100vh",
+                width: "100vw",
+                overflow: "hidden",
+                background: theme.palette.gradient?.background,
+              },
+            })}
+          />
+
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
