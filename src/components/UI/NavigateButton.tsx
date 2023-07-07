@@ -9,7 +9,7 @@ type NavigateButtonProps = {
   href?: string;
   variant: "text" | "contained" | "outlined";
   title: string;
-  onClick?: () => {};
+  onClick?: () => void ;
 };
 
 export const NavigateButton = ({

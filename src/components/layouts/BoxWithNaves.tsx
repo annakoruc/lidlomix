@@ -1,6 +1,8 @@
 import { Box, Container } from "@mui/material";
 import React from "react";
-import { MobileNavbar } from "../MobileNavbar";
+import { Navbar } from "../Navbar";
+
+import { BottomNavigationComponent } from "../UI";
 
 type BoxNavesType = {
   children: JSX.Element | JSX.Element[];
@@ -9,7 +11,7 @@ type BoxNavesType = {
 export const BoxWithNaves = ({ children }: BoxNavesType) => {
   return (
     <Box>
-      <MobileNavbar />
+      <Navbar />
       <Container
         maxWidth="xl"
         sx={{
@@ -19,6 +21,7 @@ export const BoxWithNaves = ({ children }: BoxNavesType) => {
       >
         {children}
       </Container>
+      <BottomNavigationComponent />
     </Box>
   );
 };

@@ -1,27 +1,36 @@
 "use client";
-import { IconEmailSvg } from "@/assets";
-import { FormControl, Input, InputAdornment, TextField } from "@mui/material";
-import React, { RefObject, forwardRef } from "react";
+
+import React from "react";
+import { inputTheme } from "@/styles/themes";
+import { ThemeProvider } from "@mui/material/styles";
+import { Input, InputAdornment } from "@mui/material";
 
 type InputProps = {
   placeholder: string;
-  //TODO change type
-  icon: any;
+  icon: JSX.Element;
   required?: boolean;
-  // ref: RefObject<HTMLInputElement>;
+  type: "text" | "password";
 };
 
 export const InputComponent = React.forwardRef(function InputComponent(
-  { placeholder, icon, required }: InputProps,
+  { placeholder, icon, required, type }: InputProps,
   ref
 ) {
   return (
-    <Input
-      id={placeholder}
-      placeholder={placeholder}
-      ref={ref}
-      startAdornment={<InputAdornment position="start">{icon}</InputAdornment>}
-      required={required}
-    />
+    <ThemeProvider theme={inputTheme}>
+      <Input
+        id={placeholder}
+        placeholder={placeholder}
+        type={type}
+        ref={ref}
+        color="primary"
+        // variant="standard"
+        startAdornment={
+          <InputAdornment position="start">{icon}</InputAdornment>
+        }
+        required={required}
+        // sx={{ color: "secondary.light", borderBottomColor: "yellow" }}
+      />
+    </ThemeProvider>
   );
 });

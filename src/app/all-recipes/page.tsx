@@ -1,7 +1,7 @@
 "use client";
 
-import { MobileNavbar } from "@/components";
-import { BoxWithNaves } from "@/components/UI";
+import { Navbar } from "@/components";
+import { BoxWithNaves } from "@/components/layouts";
 import { Container } from "@mui/material";
 
 const AllRecipes = () => {
