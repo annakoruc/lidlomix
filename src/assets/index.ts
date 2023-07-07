@@ -2,3 +2,8 @@ export * from "./LogoSvg";
 export * from "./IconEmailSvg";
 export * from "./IconPasswordSvg";
 export * from "./IconMenu";
+export * from "./IconSearch";
+export * from "./IconCalender";
+export * from "./IconFavorites";
+export * from "./IconList";
+export * from "./IconRecipes";
