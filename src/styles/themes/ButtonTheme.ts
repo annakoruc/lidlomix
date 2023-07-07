@@ -2,7 +2,12 @@ import { createTheme } from "@mui/material/styles";
 import { themeVariables } from "./themeVariables";
 
 export const buttonTheme = createTheme({
-  palette: { primary: { main: themeVariables.colors["orange"] } },
+  palette: {
+    primary: {
+      main: themeVariables.colors["orange"],
+      contrastText: themeVariables.colors["white"],
+    },
+  },
   components: {
     MuiButton: {
       styleOverrides: {
@@ -24,10 +29,7 @@ export const buttonTheme = createTheme({
             padding: "5px",
           },
         },
-        {
-          props: { variant: "contained" },
-          style: { color: themeVariables.colors["white"] },
-        },
+
         {
           props: { variant: "outlined" },
           style: {

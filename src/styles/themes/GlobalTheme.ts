@@ -37,6 +37,8 @@ export const GlobalTheme = createTheme({
     secondary: {
       light: "#FFFFFF",
       main: "#F28400",
+      dark: "#F28400",
+      contrastText: "#FFFFFF",
     },
     gradient: {
       background: themeVariables.gradients["background"],

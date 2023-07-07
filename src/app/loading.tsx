@@ -1,8 +1,7 @@
 "use client";
 
 import LogoSvg from "@/assets/LogoSvg";
-import { BoxFlexComponent } from "@/components/UI";
-import { Box } from "@mui/material";
+import { BoxFlexComponent } from "@/components/layouts";
 import React from "react";
 import { Rings } from "react-loader-spinner";
 

@@ -9,16 +9,13 @@ import { getDatabase } from "@/firebase/database/getDataBase";
 import { useEffect, useRef } from "react";
 
 // import "./loginPage.scss";
-import {
-  BoxFlexComponent,
-  InputComponent,
-  NavigateButton,
-} from "@/components/UI";
-import { Footer } from "@/components";
+import { InputComponent, NavigateButton } from "@/components/UI";
+
 import { IconEmailSvg, IconPasswordSvg } from "@/assets";
-import { Box, FormControl } from "@mui/material";
+
 import LogoSvg from "@/assets/LogoSvg";
-import { gradientBackground } from "../../styles/variables.scss";
+
+import { BoxFlexComponent } from "@/components/layouts";
 
 const LoginPage = () => {
   const loginEmail = useRef<HTMLInputElement>(null);
@@ -34,16 +31,17 @@ const LoginPage = () => {
 
   return (
     <BoxFlexComponent>
-      <LogoSvg />
       <label>
         <InputComponent
           placeholder="Your email"
+          type="text"
           icon={<IconEmailSvg color={"black"} />}
           ref={loginEmail}
           required
         />
         <InputComponent
           placeholder="Password"
+          type="password"
           icon={<IconPasswordSvg color={"black"} />}
           ref={loginPassword}
           required
@@ -53,6 +51,7 @@ const LoginPage = () => {
         variant="contained"
         title="Login"
         onClick={() => loginWithEmail(loginEmail, loginPassword)}
+        href={"/my-profile"}
       />
     </BoxFlexComponent>
   );
