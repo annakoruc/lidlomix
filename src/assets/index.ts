@@ -7,3 +7,4 @@ export * from "./IconCalender";
 export * from "./IconFavorites";
 export * from "./IconList";
 export * from "./IconRecipes";
+export * from "./IconFilter";

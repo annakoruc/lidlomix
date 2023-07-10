@@ -1,6 +1,6 @@
 import { Box, Container } from "@mui/material";
 import React from "react";
-import { Navbar } from "../Navbar";
+import { Navbar } from "../UI";
 
 import { BottomNavigationComponent } from "../UI";
 

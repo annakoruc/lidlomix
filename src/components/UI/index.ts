@@ -3,3 +3,4 @@ export * from "./LinkComponent";
 export * from "./InputComponent";
 export * from "./NavMenu";
 export * from "./BottomNavigationComponent";
+export * from "./Navbar";
