@@ -11,7 +11,7 @@ export const IconSearch = (props: SVGProps<SVGSVGElement>) => (
       {...props}
     >
       <path
-        fill={props.color ? props.color : "url(#a)"}
+        fill={props.color ?? "url(#a)"}
         d="M11.298 0c6.176 0 11.19 4.962 11.19 11.076 0 6.114-5.014 11.076-11.19 11.076-6.177 0-11.19-4.962-11.19-11.076C.108 4.962 5.12 0 11.298 0Zm10.549 19.778 3.517 3.48L23.605 25l-3.516-3.482 1.758-1.74Z"
       />
       <defs>
