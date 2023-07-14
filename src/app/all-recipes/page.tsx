@@ -1,13 +1,23 @@
 "use client";
 
-import { Navbar } from "@/components";
+import { RecipeCard } from "@/components/UI";
 import { BoxWithNaves } from "@/components/layouts";
-import { Container } from "@mui/material";
 
 const AllRecipes = () => {
   return (
     <BoxWithNaves>
-      <div className="recipes_content">All Recipes</div>
+      <RecipeCard />
+      <RecipeCard />
+
+      <RecipeCard />
+      <RecipeCard />
+      <RecipeCard />
+      <RecipeCard />
+      <RecipeCard />
+      <RecipeCard />
+      <RecipeCard />
+      <RecipeCard />
+      <RecipeCard />
     </BoxWithNaves>
   );
 };

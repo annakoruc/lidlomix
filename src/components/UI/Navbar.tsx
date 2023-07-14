@@ -7,8 +7,11 @@ import { IconSearch } from "@/assets";
 export const Navbar = () => {
   return (
     <AppBar
-      position="static"
-      sx={{ bgcolor: "transparent", boxShadow: "none" }}
+      position="sticky"
+      sx={{
+        bgcolor: "transparent",
+        boxShadow: "none",
+      }}
     >
       <Toolbar
         sx={{

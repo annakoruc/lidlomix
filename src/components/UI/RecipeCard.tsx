@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { Box, Card, Typography } from "@mui/material";
 import { RatingComponent } from "./RatingComponent";
@@ -7,10 +8,10 @@ export const RecipeCard = () => {
   return (
     <Card
       sx={{
-        width: "170px",
-        //TODO RWD
-        // minWidth: "170px",
-        // maxWidth: "200px",
+        //TODO last item in list in the same width!
+
+        flex: "40%",
+        maxWidth: "200px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -20,7 +21,7 @@ export const RecipeCard = () => {
         position: "relative",
       }}
     >
-      <img src="/images/rectangle-13.png" alt="image" />
+      <img src="/images/rectangle-13.png" alt="image" width="100%" />
       <Box sx={{ position: "absolute", top: 16, right: 16 }}>
         <IconHeart />
       </Box>
