@@ -7,8 +7,7 @@ import React from "react";
 const MyProfile = () => {
   return (
     <BoxWithNaves>
-      <div>MyProfile</div>
-      <RecipeCard />
+      <p>My profile</p>
     </BoxWithNaves>
   );
 };

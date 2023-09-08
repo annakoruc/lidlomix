@@ -12,19 +12,7 @@ export const BoxWithNaves = ({ children }: BoxNavesType) => {
   return (
     <Box>
       <Navbar />
-      <Container
-        maxWidth="xl"
-        sx={{
-          //TODO delete navs from height
-          height: "100%",
-          position: "relative",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 2,
-        }}
-      >
-        {children}
-      </Container>
+      {children}
       <BottomNavigationComponent />
     </Box>
   );

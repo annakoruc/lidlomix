@@ -23,9 +23,9 @@ export const IconEmptyStar = (props: SVGProps<SVGSVGElement>) => {
           width="10.4634"
           height="10"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"

@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
-import { IconFilter } from "@/assets";
+import { IconFilter, IconMenu } from "@/assets";
 import { Box } from "@mui/material";
 
 export const NavMenu = () => {
@@ -26,7 +26,7 @@ export const NavMenu = () => {
         onClick={handleClick}
         sx={{ minWidth: 0 }}
       >
-        <IconFilter />
+        <IconMenu />
       </Button>
       <Menu
         id="basic-menu"
