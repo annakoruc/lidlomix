@@ -22,7 +22,9 @@ const mavenPro = Maven_Pro({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const GlobalTheme = createTheme({
   typography: {
-    fontFamily: mavenPro.style.fontFamily,
+    allVariants: {
+      fontFamily: inter.style.fontFamily,
+    },
   },
   palette: {
     text: {
@@ -47,10 +49,34 @@ export const GlobalTheme = createTheme({
   },
 
   components: {
-    MuiContainer: {
+    //MUI ScrollableTabs
+    MuiTabs: {
       styleOverrides: {
         root: {
-          fontFamily: themeVariables.fonts["mavenPro"],
+          minHeight: "30px",
+          boxShadow: "0px 0px 10px 0px rgba(12, 48, 72, 0.06)",
+        },
+        flexContainer: {
+          height: "30px",
+        },
+        indicator: {
+          display: "none",
+        },
+        scroller: {
+          height: "30px",
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          minWidth: 0,
+          padding: "0 16px",
+          minHeight: "30px",
+          color: themeVariables.colors["lightblue"],
+          "&.Mui-selected": {
+            color: themeVariables.colors["orange"],
+          },
         },
       },
     },

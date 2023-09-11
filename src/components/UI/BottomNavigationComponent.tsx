@@ -24,7 +24,14 @@ export const BottomNavigationComponent = () => {
   const id = useId();
 
   return (
-    <BottomNavigation sx={{ width: "100%", position: "fixed", bottom: 0 }}>
+    <BottomNavigation
+      sx={{
+        width: "100%",
+        position: "fixed",
+        bottom: 0,
+        boxShadow: "0px 0px 10px 0px rgba(12, 48, 72, 0.06)",
+      }}
+    >
       {bottomNavButtons.map((button) => (
         <BottomNavigationAction
           key={id}
