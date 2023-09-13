@@ -33,7 +33,6 @@ export const Navbar = () => {
 
   return (
     <AppBar position="sticky" sx={changeNavbar ? scrolledNavbar : staticNavbar}>
-      {/* TODO change location to nested paths */}
       {location.split("/")[1] !== "recipe" ? (
         <Toolbar
           sx={{

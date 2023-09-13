@@ -12,8 +12,6 @@ export const RecipeCard = ({ title }: { title: string }) => {
   return (
     <Card
       sx={{
-        //TODO last item in list in the same width!
-
         flex: "40%",
         maxWidth: "200px",
         display: "flex",
