@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import { BottomNavigationAction, BottomNavigation } from "@mui/material";
 import {
   IconCalender,
@@ -7,31 +7,33 @@ import {
   IconRecipes,
   IconList,
 } from "@/assets";
+import { BottomNavButtonsProps } from "@/types/BottomNavButtonsProps";
 
+const bottomNavButtons: BottomNavButtonsProps = [
+  { id: "1B", label: "Recipes", value: "Recipes", icon: <IconRecipes /> },
+  { id: "2B", label: "Search", value: "Search", icon: <IconSearch /> },
+  { id: "3B", label: "Favorites", value: "Favorites", icon: <IconFavorites /> },
+  { id: "4B", label: "List", value: "List", icon: <IconList /> },
+  { id: "5B", label: "Calender", value: "Calender", icon: <IconCalender /> },
+];
 export const BottomNavigationComponent = () => {
   return (
-    <BottomNavigation sx={{ width: "100%", position: "fixed", bottom: 0 }}>
-      <BottomNavigationAction
-        label="Recipes"
-        value="Recipes"
-        icon={<IconRecipes />}
-      />
-      <BottomNavigationAction
-        label="Search"
-        value="Search"
-        icon={<IconSearch />}
-      />
-      <BottomNavigationAction
-        label="Favorites"
-        value="Favorites"
-        icon={<IconFavorites />}
-      />
-      <BottomNavigationAction label="List" value="List" icon={<IconList />} />
-      <BottomNavigationAction
-        label="Calender"
-        value="Calender"
-        icon={<IconCalender />}
-      />
+    <BottomNavigation
+      sx={{
+        width: "100%",
+        position: "fixed",
+        bottom: 0,
+        boxShadow: "0px 0px 10px 0px rgba(12, 48, 72, 0.06)",
+      }}
+    >
+      {bottomNavButtons.map((button) => (
+        <BottomNavigationAction
+          key={button.id}
+          label={button.label}
+          value={button.value}
+          icon={button.icon}
+        />
+      ))}
     </BottomNavigation>
   );
 };

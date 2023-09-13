@@ -1,13 +1,27 @@
 "use client";
 
-import { Navbar } from "@/components";
+import { RecipeCard } from "@/components/UI";
 import { BoxWithNaves } from "@/components/layouts";
-import { Container } from "@mui/material";
+import { Box } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 const AllRecipes = () => {
   return (
     <BoxWithNaves>
-      <div className="recipes_content">All Recipes</div>
+      <Box
+        sx={{
+          height: "calc(100% - 56px)",
+          width: "100%",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, 45%)",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+          marginBottom: "70px",
+        }}
+      >
+        <RecipeCard title="Raspberry cake with cream" />
+      </Box>
     </BoxWithNaves>
   );
 };

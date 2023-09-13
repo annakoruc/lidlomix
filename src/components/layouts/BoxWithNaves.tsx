@@ -1,6 +1,6 @@
 import { Box, Container } from "@mui/material";
 import React from "react";
-import { Navbar } from "../Navbar";
+import { Navbar } from "../UI";
 
 import { BottomNavigationComponent } from "../UI";
 
@@ -10,17 +10,9 @@ type BoxNavesType = {
 
 export const BoxWithNaves = ({ children }: BoxNavesType) => {
   return (
-    <Box>
+    <Box sx={{ display: "grid", gridTemplateRows: "auto 1fr auto" }}>
       <Navbar />
-      <Container
-        maxWidth="xl"
-        sx={{
-          height: "100%",
-          position: "relative",
-        }}
-      >
-        {children}
-      </Container>
+      {children}
       <BottomNavigationComponent />
     </Box>
   );

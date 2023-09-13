@@ -29,8 +29,9 @@ export default function RootLayout({
               body: {
                 height: "100vh",
                 width: "100vw",
-                overflow: "hidden",
+                // overflow: "hidden",
                 background: theme.palette.gradient?.background,
+                backgroundAttachment: "fixed",
               },
             })}
           />

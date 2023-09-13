@@ -8,7 +8,6 @@ import { Rings } from "react-loader-spinner";
 const Loading = () => {
   return (
     <BoxFlexComponent>
-      <LogoSvg color="white" />
       <Rings
         height="80"
         width="80"

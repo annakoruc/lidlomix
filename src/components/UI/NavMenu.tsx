@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
-import { IconMenu } from "@/assets";
+import { IconFilter, IconMenu } from "@/assets";
 import { Box } from "@mui/material";
 
 export const NavMenu = () => {
@@ -24,6 +24,7 @@ export const NavMenu = () => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
+        sx={{ minWidth: 0 }}
       >
         <IconMenu />
       </Button>
