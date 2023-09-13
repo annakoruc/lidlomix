@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase.config";
+import { auth } from "../firebaseConfig";
 import { MutableRefObject } from "react";
 
 export const signUpWithEmail = async (
