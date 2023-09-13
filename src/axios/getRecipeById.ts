@@ -1,7 +1,7 @@
 import { tastyApiVariables } from "@/utils/tastyApiVariables";
 import { axiosRequest } from "@/utils/axiosRequest";
 
-export const getRepiceById = (id: string) => {
+export const getRecipeById = (id: string) => {
   const options = {
     method: "GET",
     url: tastyApiVariables.url("get-more-info"),
