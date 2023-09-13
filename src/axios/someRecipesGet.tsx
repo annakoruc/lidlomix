@@ -1,11 +1,11 @@
 import { tastyApiVariables } from "@/utils/tastyApiVariables";
 import { axiosRequest } from "@/utils/axiosRequest";
 
-export const getSimilarRecipes = (id: string) => {
+export const getSomeRecipes = (id: string) => {
   const options = {
     method: "GET",
-    url: tastyApiVariables.url("list-similarities"),
-    params: { recipe_id: id },
+    url: tastyApiVariables.url("list"),
+    params: { tags: id },
     headers: tastyApiVariables.headers,
   };
 
