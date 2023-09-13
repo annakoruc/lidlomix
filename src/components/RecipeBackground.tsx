@@ -9,30 +9,29 @@ export const RecipeBackground = ({
   return (
     <Box
       sx={{
+        position: "fixed",
         width: "100%",
-        position: "absolute",
-        bottom: 56,
-        overflow: "hidden",
         display: "grid",
+        bottom: "56px",
       }}
     >
+      {/* Background! */}
       <Box
         sx={{
-          gridArea: 1 / 1,
           width: "100%",
-          height: 500,
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-end",
           justifyContent: "flex-end",
-
-          // alignItems,
+          zIndex: -1,
         }}
       >
         <Box
           sx={{
             width: "100%",
             height: "75%",
+            position: "absolute",
+            bottom: 0,
             // bgcolor: "red",
             bgcolor: "white",
             alignSelf: "flex-end",
@@ -78,16 +77,8 @@ export const RecipeBackground = ({
           }}
         />
       </Box>
-      <Box
-        sx={{
-          gridArea: 1 / 1,
-          position: "fixed",
-          width: 1,
-          height: 1,
-        }}
-      >
-        {children}
-      </Box>
+      {/* Content! */}
+      {children}
     </Box>
   );
 };

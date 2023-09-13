@@ -24,6 +24,7 @@ export const GlobalTheme = createTheme({
   typography: {
     allVariants: {
       fontFamily: inter.style.fontFamily,
+      color: themeVariables.colors["darkblue"],
     },
   },
   palette: {
@@ -74,9 +75,52 @@ export const GlobalTheme = createTheme({
           padding: "0 16px",
           minHeight: "30px",
           color: themeVariables.colors["lightblue"],
+          textTransform: "capitalize",
+          fontSize: "15px",
           "&.Mui-selected": {
             color: themeVariables.colors["orange"],
+            fontWeight: "700",
           },
+        },
+      },
+    },
+    //MUI List
+    MuiList: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: { minWidth: 0, height: "30px" },
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          color: themeVariables.colors["lightblue"],
+          "&.Mui-checked": {
+            color: themeVariables.colors["orange"],
+          },
+        },
+      },
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        primary: {
+          fontSize: "14px",
+        },
+        secondary: {
+          fontSize: "12px",
         },
       },
     },

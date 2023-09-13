@@ -10,7 +10,7 @@ type BoxNavesType = {
 
 export const BoxWithNaves = ({ children }: BoxNavesType) => {
   return (
-    <Box>
+    <Box sx={{ display: "grid", gridTemplateRows: "auto 1fr auto" }}>
       <Navbar />
       {children}
       <BottomNavigationComponent />

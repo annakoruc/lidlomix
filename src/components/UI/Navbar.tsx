@@ -3,11 +3,12 @@ import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { IconSearch } from "@/assets";
 import { NavMenu } from "./NavMenu";
 import { usePathname, useRouter } from "next/navigation";
-import { IconBack } from "@/assets/IconBack";
+import { Icon } from "@iconify/react";
 
 export const Navbar = () => {
   const [changeNavbar, setChangeNavbar] = useState(false);
   const location = usePathname();
+  const router = useRouter();
 
   const changeNavbarStyle = () => {
     window.scrollY >= 40 ? setChangeNavbar(true) : setChangeNavbar(false);
@@ -33,7 +34,7 @@ export const Navbar = () => {
   return (
     <AppBar position="sticky" sx={changeNavbar ? scrolledNavbar : staticNavbar}>
       {/* TODO change location to nested paths */}
-      {location !== "/recipe/a" ? (
+      {location.split("/")[1] !== "recipe" ? (
         <Toolbar
           sx={{
             width: "100%",
@@ -42,7 +43,11 @@ export const Navbar = () => {
             padding: 3,
           }}
         >
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, color: "white" }}
+          >
             {"All Recipes".toUpperCase()}
           </Typography>
           <Box sx={{ display: "flex", gap: 2 }}>
@@ -60,7 +65,11 @@ export const Navbar = () => {
             padding: 3,
           }}
         >
-          <IconBack />
+          <Icon
+            icon="vaadin:arrow-backward"
+            onClick={() => router.back()}
+            style={{ fontSize: "30px" }}
+          ></Icon>
           <Box>
             <NavMenu />
           </Box>

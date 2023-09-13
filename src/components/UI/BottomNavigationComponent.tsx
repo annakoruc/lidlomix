@@ -10,19 +10,13 @@ import {
 import { BottomNavButtonsProps } from "@/types/BottomNavButtonsProps";
 
 const bottomNavButtons: BottomNavButtonsProps = [
-  { label: "Recipes", value: "Recipes", icon: <IconRecipes /> },
-  { label: "Search", value: "Search", icon: <IconSearch /> },
-  {
-    label: "Favorites",
-    value: "Favorites",
-    icon: <IconFavorites />,
-  },
-  { label: "List", value: "List", icon: <IconList /> },
-  { label: "Calender", value: "Calender", icon: <IconCalender /> },
+  { id: "1B", label: "Recipes", value: "Recipes", icon: <IconRecipes /> },
+  { id: "2B", label: "Search", value: "Search", icon: <IconSearch /> },
+  { id: "3B", label: "Favorites", value: "Favorites", icon: <IconFavorites /> },
+  { id: "4B", label: "List", value: "List", icon: <IconList /> },
+  { id: "5B", label: "Calender", value: "Calender", icon: <IconCalender /> },
 ];
 export const BottomNavigationComponent = () => {
-  const id = useId();
-
   return (
     <BottomNavigation
       sx={{
@@ -30,11 +24,12 @@ export const BottomNavigationComponent = () => {
         position: "fixed",
         bottom: 0,
         boxShadow: "0px 0px 10px 0px rgba(12, 48, 72, 0.06)",
+        // bgcolor: "rgba(100, 100, 30, 0.06)",
       }}
     >
       {bottomNavButtons.map((button) => (
         <BottomNavigationAction
-          key={id}
+          key={button.id}
           label={button.label}
           value={button.value}
           icon={button.icon}

@@ -6,5 +6,3 @@ export * from "./BottomNavigationComponent";
 export * from "./Navbar";
 export * from "./RatingComponent";
 export * from "./RecipeCard";
-export * from "./InfoCardInRecipe";
-export * from "./ScrollableTabs";

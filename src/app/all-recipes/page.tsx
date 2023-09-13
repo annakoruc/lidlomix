@@ -3,33 +3,24 @@
 import { RecipeCard } from "@/components/UI";
 import { BoxWithNaves } from "@/components/layouts";
 import { Box } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 const AllRecipes = () => {
   return (
     <BoxWithNaves>
       <Box
         sx={{
-          height: "100%",
+          height: "calc(100% - 56px)",
           width: "100%",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, 180px)",
+          gridTemplateColumns: "repeat(auto-fill, 45%)",
           alignItems: "center",
           justifyContent: "center",
           gap: 2,
-          marginBottom: 2,
+          marginBottom: "70px",
         }}
       >
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
-        <RecipeCard />
+        <RecipeCard title="Raspberry cake with cream" />
       </Box>
     </BoxWithNaves>
   );

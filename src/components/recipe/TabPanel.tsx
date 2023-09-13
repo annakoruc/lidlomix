@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
 
 interface TabPanelProps {
@@ -17,10 +17,13 @@ export const TabPanel = (props: TabPanelProps) => {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
+      style={{ overflowY: "scroll", height: "250px" }}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+        <Box
+          sx={{ display: "flex", flexDirection: "column", padding: 2, gap: 2 }}
+        >
+          {children}
         </Box>
       )}
     </div>

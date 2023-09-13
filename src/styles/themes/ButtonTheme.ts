@@ -15,7 +15,7 @@ export const buttonTheme = createTheme({
           // fontFamily: themeVariables.fonts["mavenPro"],
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
           fontWeight: "400",
-          textTransform: "capitalize",
+          textTransform: "inherit",
         },
       },
       variants: [

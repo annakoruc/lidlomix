@@ -1,13 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { RecipeBackground } from "@/components";
 import { BoxWithNaves } from "@/components/layouts";
-import { Box, Container, Paper, Typography } from "@mui/material";
-import { relative } from "path";
+import { Box, Typography } from "@mui/material";
+
 import { FC } from "react";
 import { Icon } from "@iconify/react";
-import { InfoCardInRecipe, ScrollableTabs } from "@/components/UI";
-import { TabPanel } from "@/components/UI/TabPanel";
+
+import { InfoCardInRecipe, ScrollableTabs } from "@/components/recipe";
 
 interface pageProps {
   params: { recipeTitle: string };
@@ -16,7 +17,7 @@ interface pageProps {
 const Recipe: FC<pageProps> = ({ params }) => {
   return (
     <BoxWithNaves>
-      <Box sx={{ display: "grid" }}>
+      <Box sx={{ display: "grid", height: "100%", width: "100vw" }}>
         <img
           src="/images/raspberryCake.png"
           alt="image"
@@ -34,6 +35,7 @@ const Recipe: FC<pageProps> = ({ params }) => {
               top: "0.5rem",
             }}
           />
+
           <Box sx={{ padding: "38px 32px 0 32px" }}>
             <Typography
               variant="h5"

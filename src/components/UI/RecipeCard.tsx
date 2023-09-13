@@ -3,8 +3,12 @@ import React from "react";
 import { Box, Card, Typography } from "@mui/material";
 import { RatingComponent } from "./RatingComponent";
 import { IconHeart } from "@/assets";
+import { useRouter } from "next/navigation";
 
-export const RecipeCard = () => {
+export const RecipeCard = ({ title }: { title: string }) => {
+  const router = useRouter();
+  let recipePath = title.replaceAll(" ", "-");
+
   return (
     <Card
       sx={{
@@ -19,7 +23,9 @@ export const RecipeCard = () => {
         padding: 0.5,
         borderRadius: 2,
         position: "relative",
+        cursor: "pointer",
       }}
+      onClick={() => router.push(`/recipe/${recipePath}`)}
     >
       <img src="/images/rectangle-13.png" alt="image" width="100%" />
       <Box sx={{ position: "absolute", top: 16, right: 16 }}>
@@ -34,7 +40,7 @@ export const RecipeCard = () => {
         }}
       >
         <Typography sx={{ fontWeight: "bold", lineHeight: 1 }}>
-          Raspberry cake with cream
+          {title}
         </Typography>
         <Typography
           sx={{
