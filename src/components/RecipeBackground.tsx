@@ -72,7 +72,8 @@ export const RecipeBackground = ({
             borderRadius: "100%",
             position: "absolute",
             top: 0,
-            left: "-50%",
+            left: -200,
+
             zIndex: -1,
           }}
         />

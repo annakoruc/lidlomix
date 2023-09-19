@@ -5,7 +5,7 @@ import { Navbar } from "../UI";
 import { BottomNavigationComponent } from "../UI";
 
 type BoxNavesType = {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | boolean;
 };
 
 export const BoxWithNaves = ({ children }: BoxNavesType) => {
