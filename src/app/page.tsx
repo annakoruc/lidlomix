@@ -1,12 +1,14 @@
 "use client";
-
+import { useEffect } from "react";
 import { NavigateButton } from "@/components/UI";
-
-import LogoSvg from "@/assets/LogoSvg";
 import { Box } from "@mui/material";
 import { BoxFlexComponent } from "@/components/layouts";
+import { getSomeRecipes } from "@/axios/someRecipesGet";
 
 export default function Home() {
+  // useEffect(() => {
+  //   getSomeRecipes("chicken");
+  // }, []);
   return (
     <BoxFlexComponent>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>

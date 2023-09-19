@@ -1,5 +1,6 @@
 "use client";
 
+import { useAppSelector } from "@/redux/store";
 import {
   Checkbox,
   List,
@@ -11,6 +12,9 @@ import {
 import React from "react";
 
 export const IngredientsList = () => {
+  const ingredients = useAppSelector(
+    (state) => state.recipe.currentRecipe.sections[0]
+  );
   const [checked, setChecked] = React.useState([0]);
 
   const handleToggle = (value: number) => () => {
@@ -34,26 +38,30 @@ export const IngredientsList = () => {
         // height: "100%",
       }}
     >
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((value) => {
-        const labelId = `checkbox-list-label-${value}`;
+      {ingredients.components.map((ingredient) => {
+        const labelId = `checkbox-list-label-${ingredient.id}`;
+        const description =
+          ingredient.raw_text === "n/a"
+            ? ingredient.ingredient?.name
+            : ingredient.raw_text;
 
         return (
-          <ListItem key={value} disablePadding>
+          <ListItem key={ingredient.id} disablePadding>
             <ListItemButton
               role={undefined}
-              onClick={handleToggle(value)}
+              onClick={handleToggle(ingredient.id)}
               dense
             >
               <ListItemIcon>
                 <Checkbox
                   edge="start"
-                  checked={checked.indexOf(value) !== -1}
+                  checked={checked.indexOf(ingredient.id) !== -1}
                   tabIndex={-1}
                   disableRipple
                   inputProps={{ "aria-labelledby": labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+              <ListItemText id={labelId} primary={`${description}`} />
             </ListItemButton>
           </ListItem>
         );

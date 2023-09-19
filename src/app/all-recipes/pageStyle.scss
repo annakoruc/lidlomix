@@ -1,0 +1,30 @@
+.all-recipes-box {
+  height: calc(100% - 66px);
+  width: 100%;
+  display: column;
+  columns: 2;
+  gap: 16px;
+  padding: 0 16px;
+  margin-bottom: 70px;
+
+  > * {
+    break-inside: avoid;
+    gap: 16px;
+  }
+}
+
+@supports (grid-template-rows: masonry) {
+  .all-recipes-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 45%);
+    grid-template-rows: masonry;
+    grid-auto-flow: dense;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0;
+
+    > * {
+      margin-bottom: 0;
+    }
+  }
+}

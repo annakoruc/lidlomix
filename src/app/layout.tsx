@@ -4,6 +4,8 @@ import { GlobalTheme } from "@/styles/themes/GlobalTheme";
 import { Footer } from "@/components";
 import { Container, GlobalStyles } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
+import { Provider } from "react-redux";
+import store from "@/redux/store";
 
 export const metadata = {
   title: "Create Next App",
@@ -35,8 +37,7 @@ export default function RootLayout({
               },
             })}
           />
-
-          {children}
+          <Provider store={store}>{children}</Provider>
         </ThemeProvider>
       </body>
     </html>
