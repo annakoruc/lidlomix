@@ -6,7 +6,7 @@ export const InfoCardInRecipe = ({
   text,
 }: {
   children: React.ReactNode;
-  text: string;
+  text: string | number | null | undefined;
 }) => {
   return (
     <div
