@@ -1,9 +1,13 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import type { TypedUseSelectorHook } from "react-redux";
 import recipeReducer from "./features/recipeSlice";
+import pageTitleReducer from "./features/pageTitleSlice";
 
-const reducer = combineReducers({ recipe: recipeReducer });
+const reducer = combineReducers({
+  recipe: recipeReducer,
+  pageTitle: pageTitleReducer,
+});
 
 const store = configureStore({ reducer });
 

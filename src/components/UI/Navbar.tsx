@@ -4,9 +4,11 @@ import { IconSearch } from "@/assets";
 import { NavMenu } from "./NavMenu";
 import { usePathname, useRouter } from "next/navigation";
 import { Icon } from "@iconify/react";
+import { useAppSelector } from "@/redux/store";
 
 export const Navbar = () => {
   const [changeNavbar, setChangeNavbar] = useState(false);
+  const title = useAppSelector((state) => state.pageTitle.title);
   const location = usePathname();
   const router = useRouter();
 
@@ -47,11 +49,11 @@ export const Navbar = () => {
             component="div"
             sx={{ flexGrow: 1, color: "white" }}
           >
-            {"All Recipes".toUpperCase()}
+            {title.toUpperCase()}
           </Typography>
-          <Box sx={{ display: "flex", gap: 2 }}>
-            <IconSearch color="white" scale={0.5} />
-            <NavMenu />
+          <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+            <Icon icon="ri:search-2-fill" style={{ fontSize: "25px" }} />
+            <Icon icon="fluent:filter-24-filled" style={{ fontSize: "30px" }} />
           </Box>
         </Toolbar>
       ) : (
@@ -68,7 +70,7 @@ export const Navbar = () => {
             icon="vaadin:arrow-backward"
             onClick={() => router.back()}
             style={{ fontSize: "30px" }}
-          ></Icon>
+          />
           <Box>
             <NavMenu />
           </Box>

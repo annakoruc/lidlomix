@@ -125,5 +125,21 @@ export const GlobalTheme = createTheme({
         },
       },
     },
+    // Mui BottomNavigation
+    MuiBottomNavigationAction: {
+      //TODO change color when icon is selected
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            backgroundColor: themeVariables.colors["orange"],
+
+            color: themeVariables.colors["white"],
+          },
+          "&.Mui-selected .MuiBottomNavigationAction-label": {
+            display: "none",
+          },
+        },
+      },
+    },
   },
 });
