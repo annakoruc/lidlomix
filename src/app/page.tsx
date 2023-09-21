@@ -20,6 +20,7 @@ export default function Home() {
         {/* <NavigateButton href={"/login"} title="Login" variant="contained" />
         <NavigateButton href={"/sign-up"} title="Sign Up" variant="outlined" /> */}
       </Box>
+      {/* {recipes} */}
     </BoxFlexComponent>
   );
 }

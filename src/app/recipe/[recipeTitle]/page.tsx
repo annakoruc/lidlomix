@@ -2,7 +2,6 @@
 "use client";
 
 import { RecipeBackground } from "@/components";
-import { BoxWithNaves } from "@/components/layouts";
 import { Box, Typography } from "@mui/material";
 
 import { FC } from "react";
@@ -21,7 +20,7 @@ const Recipe: FC<pageProps> = ({ params }) => {
 
   console.log(JSON.stringify(recipe.nutrition) === "{}");
   return (
-    <BoxWithNaves>
+    <>
       {!loading && (
         <Box sx={{ display: "grid", height: "100%", width: "100vw" }}>
           <img
@@ -89,7 +88,7 @@ const Recipe: FC<pageProps> = ({ params }) => {
           </RecipeBackground>
         </Box>
       )}
-    </BoxWithNaves>
+    </>
   );
 };
 
