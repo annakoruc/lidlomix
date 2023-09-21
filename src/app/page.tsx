@@ -13,7 +13,7 @@ export default function Home() {
     <BoxFlexComponent>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
         <NavigateButton
-          href={"/all-recipes"}
+          href={"/recipes"}
           title="Some recipes"
           variant="contained"
         />

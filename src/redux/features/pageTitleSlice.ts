@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState: { title: string } = { title: "" };
+const initialState: { title: string } = { title: "recipes" };
 
 const pageTitleSlice = createSlice({
   name: "pageTitle",

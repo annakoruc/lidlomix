@@ -7,6 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { Provider } from "react-redux";
 import store from "@/redux/store";
 import { BottomNavigationComponent, Navbar } from "@/components/UI";
+import { usePathname } from "next/navigation";
 
 // export const metadata = {
 //   title: "Create Next App",
@@ -18,6 +19,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const location = usePathname();
+
+  console.log(location, typeof location);
   return (
     <html lang="en">
       <head>
@@ -27,9 +31,9 @@ export default function RootLayout({
           content="Application with recipes from tasty API"
         />
       </head>
-      <Provider store={store}>
-        <ThemeProvider theme={GlobalTheme}>
-          <body>
+      <body>
+        <Provider store={store}>
+          <ThemeProvider theme={GlobalTheme}>
             <GlobalStyles
               styles={(theme) => ({
                 "*": {
@@ -46,15 +50,18 @@ export default function RootLayout({
                 },
               })}
             />
-
-            <Box sx={{ display: "grid", gridTemplateRows: "auto 1fr auto" }}>
-              <Navbar />
-              {children}
-              <BottomNavigationComponent />
-            </Box>
-          </body>
-        </ThemeProvider>
-      </Provider>
+            {location === "/" ? (
+              children
+            ) : (
+              <Box sx={{ display: "grid", gridTemplateRows: "auto 1fr auto" }}>
+                <Navbar />
+                {children}
+                <BottomNavigationComponent />
+              </Box>
+            )}
+          </ThemeProvider>
+        </Provider>
+      </body>
     </html>
   );
 }
