@@ -59,8 +59,6 @@ export const BottomNavigationComponent = () => {
         position: "fixed",
         bottom: 0,
         boxShadow: "0px 0px 10px 0px rgba(12, 48, 72, 0.06)",
-
-        // gap: 2,
       }}
       onChange={(event, newValue) => {
         setSelectedAction(newValue);
@@ -74,7 +72,7 @@ export const BottomNavigationComponent = () => {
           label={button.label}
           value={button.value}
           icon={button.icon}
-          sx={{ fontSize: "30px", fill: themeVariables.colors.icons }}
+          sx={{ fontSize: "30px" }}
           onClick={() => {
             dispatch(setCurrentPageTitle(button.label));
             router.push(button.value);
