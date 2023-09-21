@@ -10,7 +10,8 @@ import { setCurrentRecipe } from "@/redux/features/recipeSlice";
 import { useDispatch } from "react-redux";
 
 interface RecipeType {
-  recipe: RecipeProps;
+  // TODO change type od recipe
+  recipe: any;
 }
 
 export const RecipeCard = ({ recipe }: RecipeType) => {
