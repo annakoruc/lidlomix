@@ -32,7 +32,7 @@ export const NutritionList = () => {
         </List>
       ) : (
         <Typography>
-          Sorry, we don&apos;t have information about nutritions
+          Sorry, we don&apos;t have information about nutritional values
         </Typography>
       )}
     </div>

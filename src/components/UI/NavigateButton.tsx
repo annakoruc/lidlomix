@@ -9,7 +9,9 @@ type NavigateButtonProps = {
   href?: string;
   variant: "text" | "contained" | "outlined";
   title: string;
-  onClick?: () => void ;
+  onClick?: () => void;
+  sx?: {};
+  type?: "submit" | "reset" | "button";
 };
 
 export const NavigateButton = ({
@@ -17,10 +19,18 @@ export const NavigateButton = ({
   variant,
   title,
   onClick,
+  sx,
+  type,
 }: NavigateButtonProps) => {
   return (
     <ThemeProvider theme={buttonTheme}>
-      <Button href={href} variant={variant} onClick={onClick}>
+      <Button
+        type={type}
+        href={href}
+        variant={variant}
+        onClick={onClick}
+        sx={sx}
+      >
         {title}
       </Button>
     </ThemeProvider>

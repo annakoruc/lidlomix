@@ -34,8 +34,6 @@ export const ScrollableTabs = () => {
       </Tabs>
       <TabPanel value={value} index={0}>
         <IngredientsList />
-
-        <NavigateButton variant="outlined" title="save all to shopping list" />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <DirectionsText />

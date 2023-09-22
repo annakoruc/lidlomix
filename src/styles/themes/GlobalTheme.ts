@@ -105,16 +105,7 @@ export const GlobalTheme = createTheme({
         root: { minWidth: 0, height: "30px" },
       },
     },
-    MuiCheckbox: {
-      styleOverrides: {
-        root: {
-          color: themeVariables.colors["lightblue"],
-          "&.Mui-checked": {
-            color: themeVariables.colors["orange"],
-          },
-        },
-      },
-    },
+
     MuiListItemText: {
       styleOverrides: {
         primary: {
@@ -122,6 +113,19 @@ export const GlobalTheme = createTheme({
         },
         secondary: {
           fontSize: "12px",
+        },
+      },
+    },
+    //Mui Checkbox
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          padding: "4px 8px",
+
+          color: themeVariables.colors["lightblue"],
+          "&.Mui-checked": {
+            color: themeVariables.colors["orange"],
+          },
         },
       },
     },
