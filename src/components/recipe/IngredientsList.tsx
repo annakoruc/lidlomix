@@ -51,7 +51,7 @@ export const IngredientsList = () => {
             );
           })}
           <NavigateButton
-            sx={{ margin: "8px 32px" }}
+            sx={{ margin: "32px" }}
             variant="outlined"
             title="save all to shopping list"
             type="submit"
