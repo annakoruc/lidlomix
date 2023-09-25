@@ -2,14 +2,15 @@
 
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { Checkbox, FormControlLabel } from "@mui/material";
-import React from "react";
-import { NavigateButton } from "../UI";
+import React, { useState } from "react";
+import { NavigateButton, PopupDialog } from "../UI";
 import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
 import { recipeShoppingListProps } from "@/types/recipeShoppingListProps";
 import { setRecipeShoppingList } from "@/redux/features/shoppingListSlice";
 
 export const IngredientsList = () => {
+  const [openedDialog, setOpenedDialog] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const recipeTitle = useAppSelector(
     (state) => state.recipe.currentRecipe.name
@@ -17,6 +18,10 @@ export const IngredientsList = () => {
   const ingredients = useAppSelector(
     (state) => state.recipe.currentRecipe.sections[0]
   );
+
+  const closePopupDialog = () => {
+    setOpenedDialog(false);
+  };
 
   return (
     <Formik
@@ -27,6 +32,7 @@ export const IngredientsList = () => {
           ingredients: values.shoppingList,
         };
         dispatch(setRecipeShoppingList(recipe));
+        setOpenedDialog(true);
       }}
     >
       {({ values }) => (
@@ -55,6 +61,11 @@ export const IngredientsList = () => {
             variant="outlined"
             title="save all to shopping list"
             type="submit"
+          />
+          <PopupDialog
+            openDialog={openedDialog}
+            closeDialog={closePopupDialog}
+            text={"Ingredients added to shopping list"}
           />
         </Form>
       )}

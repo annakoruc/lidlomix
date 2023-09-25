@@ -32,19 +32,39 @@ export const ScrollableTabs = () => {
         <Tab label="Nutrition" />
         <Tab label="Opinions" />
       </Tabs>
-      <TabPanel value={value} index={0}>
+      <TabPanel
+        style={{ overflowY: "scroll", height: "250px" }}
+        value={value}
+        index={0}
+      >
         <IngredientsList />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel
+        style={{ overflowY: "scroll", height: "250px" }}
+        value={value}
+        index={1}
+      >
         <DirectionsText />
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel
+        style={{ overflowY: "scroll", height: "250px" }}
+        value={value}
+        index={2}
+      >
         <Typography>Page under construction 🐌</Typography>
       </TabPanel>
-      <TabPanel value={value} index={3}>
+      <TabPanel
+        style={{ overflowY: "scroll", height: "250px" }}
+        value={value}
+        index={3}
+      >
         <NutritionList />
       </TabPanel>
-      <TabPanel value={value} index={4}>
+      <TabPanel
+        style={{ overflowY: "scroll", height: "250px" }}
+        value={value}
+        index={4}
+      >
         <Typography>Page under construction 🐌</Typography>
       </TabPanel>
     </Box>
