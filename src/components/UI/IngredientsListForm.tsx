@@ -17,7 +17,6 @@ export const IngredientsListForm = ({
     <Formik
       initialValues={{ ingredientsToDelete: [] }}
       onSubmit={(values) => console.log(values.ingredientsToDelete)}
-      style={{ padding: 0 }}
     >
       {({ values }) => (
         <Form

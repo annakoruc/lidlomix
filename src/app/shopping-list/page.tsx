@@ -3,21 +3,11 @@ import { IngredientsListForm, NavigateButton } from "@/components/UI";
 import { TabPanel } from "@/components/recipe";
 import { useAppSelector } from "@/redux/store";
 import { themeVariables } from "@/styles/themes/themeVariables";
-import { ingredientToDeleteProps } from "@/types/ingredientToDeleteProps";
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  Tab,
-  Tabs,
-  Typography,
-} from "@mui/material";
+import { Box, Tab, Tabs, Typography } from "@mui/material";
 import useId from "@mui/material/utils/useId";
-import { Field, Form, Formik } from "formik";
 import { useState } from "react";
 
 const ShoppingListPage = () => {
-  const generateId = useId();
   const shoppingList = useAppSelector(
     (state) => state.shoppingList.recipesList
   );
