@@ -22,7 +22,7 @@ export const TabPanel = (props: TabPanelProps) => {
     >
       {value === index && (
         <Box
-          sx={{ display: "flex", flexDirection: "column", padding: 2, gap: 2 }}
+        // sx={{ display: "flex", flexDirection: "column", padding: 2, gap: 2 }}
         >
           {children}
         </Box>

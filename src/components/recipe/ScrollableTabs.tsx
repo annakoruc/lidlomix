@@ -13,6 +13,12 @@ export const ScrollableTabs = () => {
     setValue(newValue);
   };
 
+  const tabPanelStyle = {
+    overflowY: "scroll",
+    height: "250px",
+    padding: "16px",
+  };
+
   return (
     <Box
       sx={{
@@ -32,39 +38,19 @@ export const ScrollableTabs = () => {
         <Tab label="Nutrition" />
         <Tab label="Opinions" />
       </Tabs>
-      <TabPanel
-        style={{ overflowY: "scroll", height: "250px" }}
-        value={value}
-        index={0}
-      >
+      <TabPanel style={tabPanelStyle} value={value} index={0}>
         <IngredientsList />
       </TabPanel>
-      <TabPanel
-        style={{ overflowY: "scroll", height: "250px" }}
-        value={value}
-        index={1}
-      >
+      <TabPanel style={tabPanelStyle} value={value} index={1}>
         <DirectionsText />
       </TabPanel>
-      <TabPanel
-        style={{ overflowY: "scroll", height: "250px" }}
-        value={value}
-        index={2}
-      >
+      <TabPanel style={tabPanelStyle} value={value} index={2}>
         <Typography>Page under construction 🐌</Typography>
       </TabPanel>
-      <TabPanel
-        style={{ overflowY: "scroll", height: "250px" }}
-        value={value}
-        index={3}
-      >
+      <TabPanel style={tabPanelStyle} value={value} index={3}>
         <NutritionList />
       </TabPanel>
-      <TabPanel
-        style={{ overflowY: "scroll", height: "250px" }}
-        value={value}
-        index={4}
-      >
+      <TabPanel style={tabPanelStyle} value={value} index={4}>
         <Typography>Page under construction 🐌</Typography>
       </TabPanel>
     </Box>
