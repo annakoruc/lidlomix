@@ -4,11 +4,13 @@ import type { TypedUseSelectorHook } from "react-redux";
 import recipeReducer from "./features/recipeSlice";
 import pageTitleReducer from "./features/pageTitleSlice";
 import shoppingListReducer from "./features/shoppingListSlice";
+import favoriteRecipeReducer from "./features/favoriteRecipesSlice";
 
 const reducer = combineReducers({
   recipe: recipeReducer,
   pageTitle: pageTitleReducer,
   shoppingList: shoppingListReducer,
+  favoriteRecipes: favoriteRecipeReducer,
 });
 
 const store = configureStore({ reducer });

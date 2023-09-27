@@ -2,13 +2,18 @@
 "use client";
 
 import { RecipeBackground } from "@/components";
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 
 import { FC } from "react";
 import { Icon } from "@iconify/react";
 
 import { InfoCardInRecipe, ScrollableTabs } from "@/components/recipe";
-import { useAppSelector } from "@/redux/store";
+import { AppDispatch, useAppSelector } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import {
+  addToFavorites,
+  deleteFromFavorites,
+} from "@/redux/features/favoriteRecipesSlice";
 
 interface pageProps {
   params: { recipeTitle: string };
@@ -17,6 +22,18 @@ interface pageProps {
 const Recipe: FC<pageProps> = ({ params }) => {
   const recipe = useAppSelector((state) => state.recipe.currentRecipe);
   const loading = useAppSelector((state) => state.recipe.loading);
+  //TODO make custom hook from useDispatch and setRecipesAsFavorite or component with heart button
+  const dispatch = useDispatch<AppDispatch>();
+  const isFavoriteRecipe = useAppSelector((state) =>
+    state.favoriteRecipes.recipes.includes(recipe)
+  );
+
+  const setRecipeAsFavorite = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    isFavoriteRecipe
+      ? dispatch(deleteFromFavorites(recipe))
+      : dispatch(addToFavorites(recipe));
+  };
 
   console.log(JSON.stringify(recipe.nutrition) === "{}");
   return (
@@ -30,16 +47,23 @@ const Recipe: FC<pageProps> = ({ params }) => {
             style={{ position: "absolute", top: 0, left: 0, zIndex: -3 }}
           />
           <RecipeBackground>
-            <Icon
-              icon="mdi:heart"
-              style={{
-                color: "white",
-                fontSize: 32,
+            <IconButton
+              sx={{
                 position: "absolute",
-                right: "2rem",
+                padding: 0,
                 top: "0.5rem",
+                right: "2rem",
               }}
-            />
+              onClick={setRecipeAsFavorite}
+            >
+              <Icon
+                icon="mdi:heart"
+                color={isFavoriteRecipe ? "orange" : "white"}
+                style={{
+                  fontSize: 32,
+                }}
+              />
+            </IconButton>
 
             <Box sx={{ padding: "38px 32px 0 32px" }}>
               <Typography
