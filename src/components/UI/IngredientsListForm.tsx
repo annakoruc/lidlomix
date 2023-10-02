@@ -1,8 +1,13 @@
 import { themeVariables } from "@/styles/themes/themeVariables";
 import { recipeShoppingListProps } from "@/types/recipeShoppingListProps";
 import { Box, Checkbox, FormControlLabel, Typography } from "@mui/material";
-import { Field, Form, Formik } from "formik";
+import { FastField, Field, FieldArray, Form, Formik } from "formik";
 import React, { useId } from "react";
+import { NavigateButton } from "./NavigateButton";
+import { deleteIngredientsFromShoppingList } from "@/redux/features/shoppingListSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { stringify } from "querystring";
 
 export const IngredientsListForm = ({
   shoppingList,
@@ -12,11 +17,15 @@ export const IngredientsListForm = ({
   tabNumber: number;
 }) => {
   const generateId = useId();
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <Formik
-      initialValues={{ ingredientsToDelete: [] }}
-      onSubmit={(values) => console.log(values.ingredientsToDelete)}
+      initialValues={{ ingredientsToDelete: {} }}
+      onSubmit={(values) => {
+        dispatch(deleteIngredientsFromShoppingList(values.ingredientsToDelete));
+        console.log("values", values.ingredientsToDelete);
+      }}
     >
       {({ values }) => (
         <Form
@@ -26,9 +35,10 @@ export const IngredientsListForm = ({
             padding: 0,
           }}
         >
-          {shoppingList.map((recipe) => (
+          {shoppingList.map((recipe, recipeIndex) => (
             <Box
-              key={generateId}
+              role="group"
+              key={`${recipe.recipeTitle}-list-key`}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -48,11 +58,12 @@ export const IngredientsListForm = ({
                   {recipe.recipeTitle}
                 </Typography>
               )}
+
               {recipe.ingredients.map((ingredient, index) => (
                 <Field
                   key={index}
                   type="checkbox"
-                  name="ingredientToDelete"
+                  name={`ingredientsToDelete.${recipe.recipeTitle}`}
                   as={FormControlLabel}
                   control={<Checkbox />}
                   value={ingredient}
@@ -62,15 +73,13 @@ export const IngredientsListForm = ({
               ))}
             </Box>
           ))}
-          {/* TODO display when will be connect with firebase */}
 
-          {/* <NavigateButton
-        sx={{ margin: "32px" }}
-        variant="outlined"
-        title="delete from Shopping List"
-        type="submit"
-        onClick={handleAddItem}
-      /> */}
+          <NavigateButton
+            sx={{ margin: "32px" }}
+            variant="outlined"
+            title="delete from Shopping List"
+            type="submit"
+          />
         </Form>
       )}
     </Formik>

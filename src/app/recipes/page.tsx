@@ -12,6 +12,7 @@ const RecipesPage = () => {
   return (
     <Box className="all-recipes-box">
       {/* TODO change exampleRecipes to data from API! */}
+      {/* TODO change masonry to masonry from MUI !*/}
       {exampleRecipes.results.map((recipe) => (
         <RecipeCard recipe={recipe} key={recipe.id} />
       ))}
