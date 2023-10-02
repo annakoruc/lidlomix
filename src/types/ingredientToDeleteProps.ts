@@ -1,4 +1,4 @@
 export interface ingredientToDeleteProps {
-  title: string;
-  ingredientToDelete: string;
+  [title: string]: string[];
+  // ingredientToDelete: string[];
 }

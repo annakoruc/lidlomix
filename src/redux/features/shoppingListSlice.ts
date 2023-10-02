@@ -15,32 +15,46 @@ const shoppingListSlice = createSlice({
       state,
       action: PayloadAction<recipeShoppingListProps>
     ) => {
-      state.recipesList.push(action.payload);
+      if (
+        state.recipesList.some(
+          (recipe) => recipe["recipeTitle"] === action.payload.recipeTitle
+        )
+      ) {
+        state.recipesList.forEach((recipe) => {
+          if (recipe.recipeTitle === action.payload.recipeTitle) {
+            recipe.ingredients.concat(action.payload.ingredients);
+          }
+        });
+      } else {
+        state.recipesList.push(action.payload);
+      }
     },
-    deleteIngredientsFrmShoppingList: (
+    deleteIngredientsFromShoppingList: (
       state,
       action: PayloadAction<ingredientToDeleteProps>
     ) => {
-      state.recipesList.forEach((recipe) => {
-        if (recipe.recipeTitle === action.payload.title) {
-          const newRecipeIngredients = recipe.ingredients.filter(
-            (ingredient) => {
-              ingredient !== action.payload.ingredientToDelete;
-            }
-          );
-          recipe.ingredients = newRecipeIngredients;
-        }
-        if (recipe.ingredients.length === 0) {
-          state.recipesList = state.recipesList.filter(
-            (recipe) => recipe.recipeTitle !== action.payload.title
-          );
-        }
+      const deletedIngredients = Object.keys(action.payload);
+
+      deletedIngredients.forEach((recipe) => {
+        const ingredientsToDelete = new Set(action.payload[recipe]);
+
+        state.recipesList.forEach((recipeInState, stateRecipeIndex) => {
+          if (recipeInState.recipeTitle === recipe) {
+            recipeInState.ingredients = recipeInState.ingredients.filter(
+              (ingredient) => !ingredientsToDelete.has(ingredient)
+            );
+          }
+        });
       });
+
+      state.recipesList = state.recipesList.filter(
+        (recipe) => recipe.ingredients.length !== 0
+      );
     },
   },
 });
 
-export const { setRecipeShoppingList, deleteIngredientsFrmShoppingList } =
+export const { setRecipeShoppingList, deleteIngredientsFromShoppingList } =
   shoppingListSlice.actions;
 
 export default shoppingListSlice.reducer;
