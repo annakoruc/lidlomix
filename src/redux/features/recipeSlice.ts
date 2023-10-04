@@ -38,12 +38,7 @@ export const setCurrentRecipe = createAsyncThunk(
 const recipeSlice = createSlice({
   name: "recipe",
   initialState,
-  reducers: {
-    //   setCurrentRecipe: (state, action: PayloadAction<RecipeProps>) => {
-    //     state = action.payload;
-    //     console.log(state);
-    //   },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(setCurrentRecipe.pending, (state) => {
       state.loading = true;
@@ -58,7 +53,5 @@ const recipeSlice = createSlice({
     });
   },
 });
-
-// export const { setCurrentRecipe } = recipeSlice.actions;
 
 export default recipeSlice.reducer;

@@ -107,7 +107,7 @@ export const RecipeCard = ({ recipe }: RecipeType) => {
           {/*TODO add difficulty?  */}
         </Typography>
         {/* TODO add rating on cards ! */}
-        <RatingComponent />
+        {/* <RatingComponent /> */}
       </Box>
     </Card>
   );
