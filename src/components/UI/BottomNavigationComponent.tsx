@@ -18,30 +18,35 @@ import { setCurrentPageTitle } from "@/redux/features/pageTitleSlice";
 const bottomNavButtons: BottomNavButtonsProps = [
   {
     id: "1B",
+    title: "All recipes",
     label: "Recipes",
     value: "recipes",
     icon: <Icon icon="material-symbols:cookie-rounded" />,
   },
   {
     id: "2B",
+    title: "Search recipes",
     label: "Search",
     value: "search",
     icon: <Icon icon="ri:search-2-fill" />,
   },
   {
     id: "3B",
+    title: "Favorites recipes",
     label: "Favorites",
     value: "favorites",
     icon: <Icon icon="mdi:book-favorite" />,
   },
   {
     id: "4B",
-    label: "Shopping List",
+    title: "Shopping list",
+    label: "List",
     value: "shopping-list",
     icon: <Icon icon="ri:file-list-3-fill" />,
   },
   {
     id: "5B",
+    title: "Calender",
     label: "Calender",
     value: "calender",
     icon: <Icon icon="fluent:calendar-28-filled" />,
@@ -67,14 +72,13 @@ export const BottomNavigationComponent = () => {
     >
       {bottomNavButtons.map((button) => (
         <BottomNavigationAction
-          showLabel={false}
           key={button.id}
           label={button.label}
           value={button.value}
           icon={button.icon}
           sx={{ fontSize: "30px" }}
           onClick={() => {
-            dispatch(setCurrentPageTitle(button.label));
+            dispatch(setCurrentPageTitle(button.title));
             router.push(button.value);
           }}
         />

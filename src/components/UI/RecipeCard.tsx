@@ -1,13 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useContext } from "react";
-import { Box, Card, Typography } from "@mui/material";
+import { Box, Card, IconButton, Typography } from "@mui/material";
 import { RatingComponent } from "./RatingComponent";
 import { IconHeart } from "@/assets";
 import { useRouter } from "next/navigation";
 import { RecipeProps } from "@/types/RecipeProps";
-import { AppDispatch } from "@/redux/store";
+import { AppDispatch, useAppSelector } from "@/redux/store";
 import { setCurrentRecipe } from "@/redux/features/recipeSlice";
 import { useDispatch } from "react-redux";
+import { Icon } from "@iconify/react";
+import {
+  addToFavorites,
+  deleteFromFavorites,
+} from "@/redux/features/favoriteRecipesSlice";
 
 interface RecipeType {
   // TODO change type od recipe
@@ -16,8 +21,10 @@ interface RecipeType {
 
 export const RecipeCard = ({ recipe }: RecipeType) => {
   const router = useRouter();
-  // let recipeContext = useContext(RecipeContext);
   const dispatch = useDispatch<AppDispatch>();
+  const isFavoriteRecipe = useAppSelector((state) =>
+    state.favoriteRecipes.recipes.includes(recipe)
+  );
 
   let recipePath = recipe.name.replaceAll(" ", "-");
 
@@ -29,6 +36,18 @@ export const RecipeCard = ({ recipe }: RecipeType) => {
     } else {
       return "";
     }
+  };
+
+  const setChosenRecipe = () => {
+    dispatch(setCurrentRecipe(recipe));
+    router.push(`/recipe/${recipePath}`);
+  };
+
+  const setRecipeAsFavorite = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    isFavoriteRecipe
+      ? dispatch(deleteFromFavorites(recipe))
+      : dispatch(addToFavorites(recipe));
   };
 
   return (
@@ -46,10 +65,7 @@ export const RecipeCard = ({ recipe }: RecipeType) => {
         cursor: "pointer",
         marginBottom: 2,
       }}
-      onClick={() => {
-        dispatch(setCurrentRecipe(recipe));
-        router.push(`/recipe/${recipePath}`);
-      }}
+      onClick={setChosenRecipe}
     >
       <img
         src={recipe.thumbnail_url}
@@ -57,9 +73,18 @@ export const RecipeCard = ({ recipe }: RecipeType) => {
         width="100%"
         style={{ borderRadius: 8 }}
       />
-      <Box sx={{ position: "absolute", top: 16, right: 16 }}>
-        <IconHeart />
-      </Box>
+      <IconButton
+        sx={{ position: "absolute", top: 8, right: 8 }}
+        onClick={setRecipeAsFavorite}
+      >
+        <Icon
+          icon="mdi:heart"
+          color={isFavoriteRecipe ? "orange" : "white"}
+          style={{
+            fontSize: 20,
+          }}
+        />
+      </IconButton>
       <Box
         sx={{
           display: "flex",

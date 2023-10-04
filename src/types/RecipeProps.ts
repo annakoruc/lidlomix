@@ -2,6 +2,7 @@ import { NutritionProps } from "./NutritionProps";
 
 export interface RecipeProps {
   name: string;
+  show_id?: number;
   thumbnail_url: string;
   cook_time_minutes?: number | null;
   prep_time_minutes?: number | null;
