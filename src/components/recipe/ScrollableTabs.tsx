@@ -15,7 +15,7 @@ export const ScrollableTabs = () => {
 
   const tabPanelStyle = {
     overflowY: "scroll",
-    height: "250px",
+    height: "320px",
     padding: "16px",
   };
 

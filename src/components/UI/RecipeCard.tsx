@@ -4,19 +4,20 @@ import { Box, Card, IconButton, Typography } from "@mui/material";
 import { RatingComponent } from "./RatingComponent";
 import { IconHeart } from "@/assets";
 import { useRouter } from "next/navigation";
-import { RecipeProps } from "@/types/RecipeProps";
+
 import { AppDispatch, useAppSelector } from "@/redux/store";
-import { setCurrentRecipe } from "@/redux/features/recipeSlice";
 import { useDispatch } from "react-redux";
 import { Icon } from "@iconify/react";
 import {
   addToFavorites,
   deleteFromFavorites,
 } from "@/redux/features/favoriteRecipesSlice";
+import { setCurrentRecipeId } from "@/redux/features/recipeIdSlice";
+import { shortRecipeProps } from "@/types";
 
 interface RecipeType {
   // TODO change type od recipe
-  recipe: any;
+  recipe: shortRecipeProps;
 }
 
 export const RecipeCard = ({ recipe }: RecipeType) => {
@@ -26,20 +27,10 @@ export const RecipeCard = ({ recipe }: RecipeType) => {
     state.favoriteRecipes.recipes.includes(recipe)
   );
 
-  let recipePath = recipe.name.replaceAll(" ", "-");
-
-  let cookTime = () => {
-    if (recipe.total_time_minutes) {
-      return `${recipe.total_time_minutes} min`;
-    } else if (recipe.total_time_tier?.tier) {
-      return `${recipe.total_time_tier?.tier}`;
-    } else {
-      return "";
-    }
-  };
+  let recipePath = recipe.title.replaceAll(" ", "-");
 
   const setChosenRecipe = () => {
-    dispatch(setCurrentRecipe(recipe));
+    dispatch(setCurrentRecipeId(recipe.id));
     router.push(`/recipe/${recipePath}`);
   };
 
@@ -68,7 +59,7 @@ export const RecipeCard = ({ recipe }: RecipeType) => {
       onClick={setChosenRecipe}
     >
       <img
-        src={recipe.thumbnail_url}
+        src={recipe.image ? recipe.image : "/images/recipeWithoutImage.png"}
         alt="recipeImage"
         width="100%"
         style={{ borderRadius: 8 }}
@@ -89,12 +80,13 @@ export const RecipeCard = ({ recipe }: RecipeType) => {
         sx={{
           display: "flex",
           flexDirection: "column",
+          width: "100%",
           padding: 0.5,
           gap: 0.5,
         }}
       >
         <Typography sx={{ fontWeight: "bold", lineHeight: 1 }}>
-          {recipe.name}
+          {recipe.title}
         </Typography>
         <Typography
           sx={{
@@ -103,11 +95,11 @@ export const RecipeCard = ({ recipe }: RecipeType) => {
             color: "primary.light",
           }}
         >
-          {cookTime()}
+          {recipe.prepTime} min
           {/*TODO add difficulty?  */}
         </Typography>
         {/* TODO add rating on cards ! */}
-        <RatingComponent />
+        {/* <RatingComponent /> */}
       </Box>
     </Card>
   );

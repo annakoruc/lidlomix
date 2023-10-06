@@ -24,7 +24,6 @@ export const IngredientsListForm = ({
       initialValues={{ ingredientsToDelete: {} }}
       onSubmit={(values) => {
         dispatch(deleteIngredientsFromShoppingList(values.ingredientsToDelete));
-        console.log("values", values.ingredientsToDelete);
       }}
     >
       {({ values }) => (
