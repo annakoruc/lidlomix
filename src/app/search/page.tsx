@@ -1,23 +1,40 @@
 "use client";
 
-import { getSomeRecipes } from "@/axios/someRecipesGet";
 import { SearchBar } from "@/components/UI";
+import { getAutocompleteRecipes } from "@/redux/features/getRecipesFromApiSlice";
+import { setCurrentRecipeId } from "@/redux/features/recipeIdSlice";
+import { AppDispatch, useAppSelector } from "@/redux/store";
 import { themeVariables } from "@/styles/themes/themeVariables";
 import { RecipeProps } from "@/types/RecipeProps";
 import { Icon } from "@iconify/react";
-import { Box, Divider, IconButton, InputBase, Paper } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  InputBase,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { Field, Form, Formik } from "formik";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const SearchPage = () => {
   const [searchedRecipes, setSearchedRecipes] = useState<RecipeProps[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
+  const { autocompleteRecipes, loading } = useAppSelector(
+    (state) => state.apiRecipes
+  );
 
   return (
     <Box sx={{ p: 2 }}>
       <Formik
         initialValues={{ searchInput: "" }}
         onSubmit={(values) => {
-          getSomeRecipes(values.searchInput);
+          dispatch(getAutocompleteRecipes(values.searchInput));
           console.log("works");
         }}
       >
@@ -27,7 +44,36 @@ const SearchPage = () => {
           </Form>
         )}
       </Formik>
-      <Box></Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          marginBottom: "70px",
+          marginTop: 2,
+        }}
+      >
+        {!loading &&
+          autocompleteRecipes.map((recipe) => (
+            <Button
+              key={`${recipe.id}-${recipe.name}`}
+              variant="text"
+              sx={{
+                color: "white",
+                justifyContent: "flex-start",
+                borderBottom: `1px solid ${themeVariables.colors.lightblue}`,
+                borderRadius: 0,
+              }}
+              onClick={() => {
+                let recipePath = recipe.name.replaceAll(" ", "-");
+
+                dispatch(setCurrentRecipeId(recipe.id));
+                router.push(`/recipe/${recipePath}`);
+              }}
+            >
+              {recipe.name}
+            </Button>
+          ))}
+      </Box>
     </Box>
   );
 };

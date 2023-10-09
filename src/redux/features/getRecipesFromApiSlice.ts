@@ -12,6 +12,7 @@ type recipeState = {
   loading: boolean;
   randomRecipes: RecipeProps[];
   currentRecipe: RecipeProps;
+  autocompleteRecipes: { id: number; name: string }[];
 };
 
 const initialState: recipeState = {
@@ -34,6 +35,7 @@ const initialState: recipeState = {
     },
     ingredients: [],
   },
+  autocompleteRecipes: [],
 };
 
 export const getRandomRecipes = createAsyncThunk(
@@ -164,6 +166,31 @@ export const getRecipeById = createAsyncThunk(
   }
 );
 
+export const getAutocompleteRecipes = createAsyncThunk(
+  "apiRecipes/autocomplete",
+  async (search: string) => {
+    const options = {
+      method: "GET",
+      url: sponacularApiVariables.url("autocomplete"),
+      params: { apiKey: sponacularApiVariables.key, number: 30, query: search },
+    };
+
+    try {
+      const response = await axios.request(options);
+      //TODO create type for recipe from response
+      return response.data.map((recipe: any) => {
+        return {
+          id: recipe.id,
+          name: recipe.title,
+        };
+      });
+    } catch (error: any) {
+      console.log(error.message);
+      throw error;
+    }
+  }
+);
+
 //SLICE
 const getRecipesFromApiSlice = createSlice({
   name: "apiRecipes",
@@ -192,6 +219,19 @@ const getRecipesFromApiSlice = createSlice({
       state.currentRecipe = action.payload!;
     });
     builder.addCase(getRecipeById.rejected, (state, action) => {
+      state.loading = false;
+      console.log("rejected", action.error);
+    });
+    //recipe by autocomplete
+    builder.addCase(getAutocompleteRecipes.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getAutocompleteRecipes.fulfilled, (state, action) => {
+      state.loading = false;
+
+      state.autocompleteRecipes = action.payload!;
+    });
+    builder.addCase(getAutocompleteRecipes.rejected, (state, action) => {
       state.loading = false;
       console.log("rejected", action.error);
     });
