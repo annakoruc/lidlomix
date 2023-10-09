@@ -5,33 +5,33 @@ import React from "react";
 
 export const NutritionList = () => {
   const nutrition = useAppSelector(
-    (state) => state.recipe.currentRecipe.nutrition
+    (state) => state.apiRecipes.currentRecipe.nutrition
   );
   return (
     <div>
       {nutrition && JSON.stringify(nutrition) !== "{}" ? (
         <List>
           <ListItemText>
-            Calories: <b>{nutrition.calories}kcal</b>
+            Calories: <b>{nutrition.calories}</b>
           </ListItemText>
           <ListItemText>
-            Fat: <b>{nutrition.fat}g</b>
+            Fat: <b>{nutrition.fat}</b>
           </ListItemText>
           <ListItemText>
-            Carbs: <b>{nutrition.carbohydrates}g</b>
+            Carbs: <b>{nutrition.carbohydrates}</b>
           </ListItemText>
           <ListItemText>
-            Fiber: <b>{nutrition.fiber}g</b>
+            Fiber: <b>{nutrition.fiber}</b>
           </ListItemText>
           <ListItemText>
-            Sugar: <b>{nutrition.sugar}g</b>
+            Sugar: <b>{nutrition.sugar}</b>
           </ListItemText>
           <ListItemText>
-            Protein: <b>{nutrition.protein}g</b>
+            Protein: <b>{nutrition.protein}</b>
           </ListItemText>
         </List>
       ) : (
-        <Typography>
+        <Typography variant="body1">
           Sorry, we don&apos;t have information about nutritional values
         </Typography>
       )}

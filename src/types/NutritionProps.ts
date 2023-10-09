@@ -1,8 +1,8 @@
 export interface NutritionProps {
-  fiber: number;
-  protein: number;
-  fat: number;
-  calories: number;
-  sugar: number;
-  carbohydrates: number;
+  fiber: string;
+  protein: string;
+  fat: string;
+  calories: string;
+  sugar: string;
+  carbohydrates: string;
 }

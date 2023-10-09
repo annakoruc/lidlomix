@@ -16,7 +16,6 @@ export const IngredientsListForm = ({
   shoppingList: recipeShoppingListProps[];
   tabNumber: number;
 }) => {
-  const generateId = useId();
   const dispatch = useDispatch<AppDispatch>();
 
   return (
@@ -24,7 +23,6 @@ export const IngredientsListForm = ({
       initialValues={{ ingredientsToDelete: {} }}
       onSubmit={(values) => {
         dispatch(deleteIngredientsFromShoppingList(values.ingredientsToDelete));
-        console.log("values", values.ingredientsToDelete);
       }}
     >
       {({ values }) => (
@@ -53,6 +51,7 @@ export const IngredientsListForm = ({
                     bgcolor: themeVariables.colors.lightblue,
                     fontSize: "16px",
                     padding: "4px 16px",
+                    fontWeight: "bold",
                   }}
                 >
                   {recipe.recipeTitle}
@@ -65,10 +64,16 @@ export const IngredientsListForm = ({
                   type="checkbox"
                   name={`ingredientsToDelete.${recipe.recipeTitle}`}
                   as={FormControlLabel}
-                  control={<Checkbox />}
+                  control={
+                    <Checkbox sx={{ color: themeVariables.colors.white }} />
+                  }
                   value={ingredient}
                   label={ingredient}
-                  style={{ padding: "4px 16px" }}
+                  style={{
+                    padding: "4px 16px",
+                    //TODO change color of checkbox text to white
+                    // color: themeVariables.colors.white,
+                  }}
                 />
               ))}
             </Box>
