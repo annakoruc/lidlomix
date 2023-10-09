@@ -1,19 +1,11 @@
 import { useAppSelector } from "@/redux/store";
-import { List, ListItemText } from "@mui/material";
+import { List, ListItemText, Typography } from "@mui/material";
 import React from "react";
 
 export const DirectionsText = () => {
   const instruction = useAppSelector(
-    (state) => state.recipe.currentRecipe.instructions
+    (state) => state.apiRecipes.currentRecipe.instructions
   );
 
-  return (
-    <List>
-      {instruction.map((step) => (
-        <ListItemText key={step.id}>
-          <b>{step.position}.</b> {step.display_text}
-        </ListItemText>
-      ))}
-    </List>
-  );
+  return <Typography variant="body1">{instruction}</Typography>;
 };

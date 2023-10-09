@@ -1,16 +1,18 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import type { TypedUseSelectorHook } from "react-redux";
-import recipeReducer from "./features/recipeSlice";
+import recipeIdReducer from "./features/recipeIdSlice";
 import pageTitleReducer from "./features/pageTitleSlice";
 import shoppingListReducer from "./features/shoppingListSlice";
 import favoriteRecipeReducer from "./features/favoriteRecipesSlice";
+import getRecipesFromApiSlice from "./features/getRecipesFromApiSlice";
 
 const reducer = combineReducers({
-  recipe: recipeReducer,
+  recipeId: recipeIdReducer,
   pageTitle: pageTitleReducer,
   shoppingList: shoppingListReducer,
   favoriteRecipes: favoriteRecipeReducer,
+  apiRecipes: getRecipesFromApiSlice,
 });
 
 const store = configureStore({ reducer });

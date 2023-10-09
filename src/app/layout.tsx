@@ -4,10 +4,12 @@ import { GlobalTheme } from "@/styles/themes/GlobalTheme";
 import { Footer } from "@/components";
 import { Box, Container, GlobalStyles } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import { Provider } from "react-redux";
-import store from "@/redux/store";
+import { Provider, useDispatch } from "react-redux";
+import store, { AppDispatch } from "@/redux/store";
 import { BottomNavigationComponent, Navbar } from "@/components/UI";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { getRandomRecipes } from "@/redux/features/getRecipesFromApiSlice";
 
 // export const metadata = {
 //   title: "Create Next App",
@@ -20,8 +22,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const location = usePathname();
+  // const dispatch = useDispatch<AppDispatch>();
 
-  console.log(location, typeof location);
+  useEffect(() => {
+    store.dispatch(getRandomRecipes());
+    // dispatch(getRandomRecipes());
+  }, []);
+
   return (
     <html lang="en">
       <head>

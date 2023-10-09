@@ -21,12 +21,12 @@ const inter = Inter({ subsets: ["latin"] });
 const mavenPro = Maven_Pro({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const GlobalTheme = createTheme({
-  // typography: {
-  // allVariants: {
-  //   fontFamily: inter.style.fontFamily,
-  // color: themeVariables.colors["darkblue"],
-  // },
-  // },
+  typography: {
+    allVariants: {
+      // fontFamily: inter.style.fontFamily,
+      color: themeVariables.colors["darkblue"],
+    },
+  },
 
   palette: {
     text: {

@@ -1,4 +1,7 @@
 ## Currently working on the look in figma and add some styling to code
+
+In the project tab (MyRecipes) you can see my progress, and in issues tabs some of my future tasks.
+
 [Check out what it will look like](https://www.figma.com/file/8BWwJ2PLUyNifepVuCOr7P/Lidlomix-przepisy?type=design&node-id=0%3A1&t=9fF9Hv69pNGZbNwE-1)
 
 [Check out how I'm doing(best way mobile e.g Iphone 12 Pro)](https://lidlomix-eight.vercel.app/)

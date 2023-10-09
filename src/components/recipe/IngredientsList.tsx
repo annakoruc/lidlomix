@@ -12,11 +12,9 @@ import { setRecipeShoppingList } from "@/redux/features/shoppingListSlice";
 export const IngredientsList = () => {
   const [openedDialog, setOpenedDialog] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-  const recipeTitle = useAppSelector(
-    (state) => state.recipe.currentRecipe.name
-  );
-  const ingredients = useAppSelector(
-    (state) => state.recipe.currentRecipe.sections[0]
+
+  const { name, ingredients } = useAppSelector(
+    (state) => state.apiRecipes.currentRecipe
   );
 
   const closePopupDialog = () => {
@@ -28,7 +26,7 @@ export const IngredientsList = () => {
       initialValues={{ shoppingList: [] }}
       onSubmit={(values, actions) => {
         const recipe: recipeShoppingListProps = {
-          recipeTitle: recipeTitle,
+          recipeTitle: name,
           ingredients: values.shoppingList,
         };
         dispatch(setRecipeShoppingList(recipe));
@@ -38,12 +36,9 @@ export const IngredientsList = () => {
     >
       {({ values }) => (
         <Form style={{ display: "flex", flexDirection: "column" }}>
-          {ingredients.components.map((ingredient) => {
+          {ingredients.map((ingredient) => {
             const labelId = `checkbox-list-label-${ingredient.id}`;
-            const description =
-              ingredient.raw_text === "n/a"
-                ? ingredient.ingredient?.name
-                : ingredient.raw_text;
+            const description = ingredient.displayedText;
 
             return (
               <Field
