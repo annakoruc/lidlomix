@@ -27,20 +27,20 @@ const Recipe: FC<pageProps> = ({ params }) => {
   const { loading, currentRecipe } = useAppSelector(
     (state) => state.apiRecipes
   );
-  // const isFavoriteRecipe = useAppSelector((state) =>
-  //   state.favoriteRecipes.recipes.includes(recipe)
-  // );
+  const isFavoriteRecipe = useAppSelector((state) =>
+    state.favoriteRecipes.recipes.includes(currentRecipe)
+  );
 
   useEffect(() => {
     dispatch(getRecipeById(recipeId));
   }, [dispatch, recipeId]);
 
-  // const setRecipeAsFavorite = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   event.stopPropagation();
-  //   isFavoriteRecipe
-  //     ? dispatch(deleteFromFavorites(recipe))
-  //     : dispatch(addToFavorites(recipe));
-  // };
+  const setRecipeAsFavorite = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    isFavoriteRecipe
+      ? dispatch(deleteFromFavorites(currentRecipe))
+      : dispatch(addToFavorites(currentRecipe));
+  };
 
   // console.log(JSON.stringify(recipe.nutrition) === "{}");
 
@@ -68,11 +68,11 @@ const Recipe: FC<pageProps> = ({ params }) => {
                 top: "0.5rem",
                 right: "2rem",
               }}
-              // onClick={setRecipeAsFavorite}
+              onClick={setRecipeAsFavorite}
             >
               <Icon
                 icon="mdi:heart"
-                // color={isFavoriteRecipe ? "orange" : "white"}
+                color={isFavoriteRecipe ? "orange" : "white"}
                 style={{
                   fontSize: 32,
                 }}

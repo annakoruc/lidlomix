@@ -1,7 +1,7 @@
-import { shortRecipeProps } from "@/types";
+import { RecipeProps, shortRecipeProps } from "@/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-type favState = { loading: boolean; recipes: shortRecipeProps[] };
+type favState = { loading: boolean; recipes: RecipeProps[] };
 
 const initialState: favState = { loading: false, recipes: [] };
 
@@ -9,20 +9,16 @@ const favoriteRecipesSlice = createSlice({
   name: "pageTitle",
   initialState,
   reducers: {
-    addToFavorites: (state, action: PayloadAction<shortRecipeProps>) => {
-      if (
-        state.recipes.some((recipe) => recipe["title"] === action.payload.title)
-      )
+    addToFavorites: (state, action: PayloadAction<RecipeProps>) => {
+      if (state.recipes.some((recipe) => recipe["id"] === action.payload.id))
         return;
       state.recipes.push(action.payload);
     },
 
-    deleteFromFavorites: (state, action: PayloadAction<shortRecipeProps>) => {
-      if (
-        state.recipes.some((recipe) => recipe["title"] === action.payload.title)
-      ) {
+    deleteFromFavorites: (state, action: PayloadAction<RecipeProps>) => {
+      if (state.recipes.some((recipe) => recipe["id"] === action.payload.id)) {
         const newFavRecipes = state.recipes.filter((recipe) => {
-          return recipe.title !== action.payload.title;
+          return recipe.id !== action.payload.id;
         });
 
         state.recipes = newFavRecipes;

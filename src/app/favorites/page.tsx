@@ -11,7 +11,7 @@ const FavoritesPage = () => {
   return (
     <Box className="all-recipes-box">
       {favRecipes.map((recipe) => (
-        <RecipeCard recipe={recipe} key={recipe.show_id} />
+        <RecipeCard recipe={recipe} key={recipe.id} />
       ))}
     </Box>
   );

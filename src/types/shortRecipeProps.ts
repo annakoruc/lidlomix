@@ -1,6 +1,6 @@
 export interface shortRecipeProps {
   id: number;
-  title: string;
+  name: string;
   image: string;
   prepTime: number;
   servings: number;

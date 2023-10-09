@@ -10,7 +10,7 @@ import axios from "axios";
 
 type recipeState = {
   loading: boolean;
-  randomRecipes: shortRecipeProps[];
+  randomRecipes: RecipeProps[];
   currentRecipe: RecipeProps;
 };
 
@@ -51,7 +51,7 @@ export const getRandomRecipes = createAsyncThunk(
       return response.data.recipes.map((recipe: any) => {
         return {
           id: recipe.id,
-          title: recipe.title,
+          name: recipe.title,
           image: recipe.image,
           prepTime: recipe.readyInMinutes,
           serving: recipe.servings,
@@ -99,8 +99,6 @@ export const getRecipeById = createAsyncThunk(
 
         neededNutrition.forEach(
           (nutrition: { name: string; amount: number; unit: string }) => {
-            // let newKey = nutrition.name.toLowerCase();
-            // nutriObject[newKey] = `${nutrition.amount} ${nutrition.unit!}`;
             switch (nutrition.name) {
               case "Fiber":
                 nutriObject.fiber = `${nutrition.amount} ${nutrition.unit!}`;
@@ -123,7 +121,6 @@ export const getRecipeById = createAsyncThunk(
                 } ${nutrition.unit!}`;
                 break;
               default:
-                // Obsługa nieznanych nazw
                 break;
             }
           }

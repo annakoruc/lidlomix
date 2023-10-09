@@ -13,11 +13,11 @@ import {
   deleteFromFavorites,
 } from "@/redux/features/favoriteRecipesSlice";
 import { setCurrentRecipeId } from "@/redux/features/recipeIdSlice";
-import { shortRecipeProps } from "@/types";
+import { RecipeProps, shortRecipeProps } from "@/types";
 
 interface RecipeType {
   // TODO change type od recipe
-  recipe: shortRecipeProps;
+  recipe: RecipeProps;
 }
 
 export const RecipeCard = ({ recipe }: RecipeType) => {
@@ -27,7 +27,7 @@ export const RecipeCard = ({ recipe }: RecipeType) => {
     state.favoriteRecipes.recipes.includes(recipe)
   );
 
-  let recipePath = recipe.title.replaceAll(" ", "-");
+  let recipePath = recipe.name.replaceAll(" ", "-");
 
   const setChosenRecipe = () => {
     dispatch(setCurrentRecipeId(recipe.id));
@@ -86,7 +86,7 @@ export const RecipeCard = ({ recipe }: RecipeType) => {
         }}
       >
         <Typography sx={{ fontWeight: "bold", lineHeight: 1 }}>
-          {recipe.title}
+          {recipe.name}
         </Typography>
         <Typography
           sx={{
