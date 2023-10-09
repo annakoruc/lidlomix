@@ -8,3 +8,4 @@ export * from "./RatingComponent";
 export * from "./RecipeCard";
 export * from "./PopupDialog";
 export * from "./IngredientsListForm";
+export * from "./SearchBar";

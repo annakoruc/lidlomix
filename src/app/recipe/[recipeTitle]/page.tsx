@@ -42,8 +42,6 @@ const Recipe: FC<pageProps> = ({ params }) => {
       : dispatch(addToFavorites(currentRecipe));
   };
 
-  // console.log(JSON.stringify(recipe.nutrition) === "{}");
-
   return (
     <>
       {loading ? (

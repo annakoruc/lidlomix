@@ -24,12 +24,13 @@ export const IngredientsList = () => {
   return (
     <Formik
       initialValues={{ shoppingList: [] }}
-      onSubmit={(values) => {
+      onSubmit={(values, actions) => {
         const recipe: recipeShoppingListProps = {
           recipeTitle: name,
           ingredients: values.shoppingList,
         };
         dispatch(setRecipeShoppingList(recipe));
+        actions.resetForm();
         setOpenedDialog(true);
       }}
     >
