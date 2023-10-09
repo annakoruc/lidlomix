@@ -13,14 +13,9 @@ import { useDispatch } from "react-redux";
 import { getRandomRecipes } from "@/redux/features/getRecipesFromApiSlice";
 
 const RecipesPage = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const { loading, randomRecipes } = useAppSelector(
     (state) => state.apiRecipes
   );
-
-  useEffect(() => {
-    dispatch(getRandomRecipes());
-  }, []);
 
   return (
     <Box className="all-recipes-box">
