@@ -5,24 +5,13 @@ import { getAutocompleteRecipes } from "@/redux/features/getRecipesFromApiSlice"
 import { setCurrentRecipeId } from "@/redux/features/recipeIdSlice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { themeVariables } from "@/styles/themes/themeVariables";
-import { RecipeProps } from "@/types/RecipeProps";
-import { Icon } from "@iconify/react";
-import {
-  Box,
-  Button,
-  Divider,
-  IconButton,
-  InputBase,
-  Paper,
-  Typography,
-} from "@mui/material";
-import { Field, Form, Formik } from "formik";
+
+import { Box, Button } from "@mui/material";
+import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const SearchPage = () => {
-  const [searchedRecipes, setSearchedRecipes] = useState<RecipeProps[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const { autocompleteRecipes, loading } = useAppSelector(

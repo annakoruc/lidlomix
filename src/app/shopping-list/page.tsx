@@ -4,7 +4,6 @@ import { TabPanel } from "@/components/recipe";
 import { useAppSelector } from "@/redux/store";
 import { themeVariables } from "@/styles/themes/themeVariables";
 import { Box, Tab, Tabs, Typography } from "@mui/material";
-import useId from "@mui/material/utils/useId";
 import { useState } from "react";
 
 const ShoppingListPage = () => {
