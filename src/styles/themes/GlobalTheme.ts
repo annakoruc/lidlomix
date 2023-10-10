@@ -21,12 +21,12 @@ const inter = Inter({ subsets: ["latin"] });
 const mavenPro = Maven_Pro({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const GlobalTheme = createTheme({
-  // typography: {
-  // allVariants: {
-  //   fontFamily: inter.style.fontFamily,
-  // color: themeVariables.colors["darkblue"],
-  // },
-  // },
+  typography: {
+    allVariants: {
+      // fontFamily: inter.style.fontFamily,
+      color: themeVariables.colors["darkblue"],
+    },
+  },
 
   palette: {
     text: {
@@ -105,16 +105,7 @@ export const GlobalTheme = createTheme({
         root: { minWidth: 0, height: "30px" },
       },
     },
-    MuiCheckbox: {
-      styleOverrides: {
-        root: {
-          color: themeVariables.colors["lightblue"],
-          "&.Mui-checked": {
-            color: themeVariables.colors["orange"],
-          },
-        },
-      },
-    },
+
     MuiListItemText: {
       styleOverrides: {
         primary: {
@@ -122,6 +113,19 @@ export const GlobalTheme = createTheme({
         },
         secondary: {
           fontSize: "12px",
+        },
+      },
+    },
+    //Mui Checkbox
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          padding: "4px 8px",
+
+          color: themeVariables.colors["lightblue"],
+          "&.Mui-checked": {
+            color: themeVariables.colors["orange"],
+          },
         },
       },
     },

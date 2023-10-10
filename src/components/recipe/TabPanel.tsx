@@ -5,27 +5,28 @@ interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
+  style?: {};
 }
 
 export const TabPanel = (props: TabPanelProps) => {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, style, ...other } = props;
 
   return (
-    <div
+    <Box
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
-      style={{ overflowY: "scroll", height: "250px" }}
+      style={style}
     >
       {value === index && (
         <Box
-          sx={{ display: "flex", flexDirection: "column", padding: 2, gap: 2 }}
+        // sx={{ display: "flex", flexDirection: "column", padding: 2, gap: 2 }}
         >
           {children}
         </Box>
       )}
-    </div>
+    </Box>
   );
 };

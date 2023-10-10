@@ -45,7 +45,7 @@ export const RecipeBackground = ({
             height: 280,
             borderRadius: "100%",
             position: "absolute",
-            top: 65,
+            top: 55,
             right: -50,
             zIndex: -1,
           }}
@@ -58,7 +58,7 @@ export const RecipeBackground = ({
             height: 320,
             borderRadius: "100%",
             position: "absolute",
-            top: 45,
+            top: 35,
             right: -70,
             zIndex: -2,
           }}

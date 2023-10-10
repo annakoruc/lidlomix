@@ -47,12 +47,12 @@ export const Navbar = () => {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, color: "white" }}
+            sx={{ flexGrow: 1, color: "white", fontSize: "16px" }}
           >
             {title.toUpperCase()}
           </Typography>
           <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-            <Icon icon="ri:search-2-fill" style={{ fontSize: "25px" }} />
+            <Icon icon="ri:search-2-fill" style={{ fontSize: "20px" }} />
             <Icon icon="fluent:filter-24-filled" style={{ fontSize: "30px" }} />
           </Box>
         </Toolbar>

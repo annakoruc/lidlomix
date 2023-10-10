@@ -1,7 +1,5 @@
 "use client";
 
-// import { getRecipeById } from "@/axios/getRecipeById";
-import { getRecipeByName } from "@/axios/getRecipeByName";
 import { loginWithEmail, loginWithGoogle, logOut } from "@/firebase/auth";
 import { getLoggedUser } from "@/firebase/auth/getLoggedUser";
 import { addToUserFavorites } from "@/firebase/database";

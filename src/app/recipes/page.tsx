@@ -1,20 +1,24 @@
 "use client";
 
 import { RecipeCard } from "@/components/UI";
-import { exampleRecipes } from "@/data/exampleRecipes";
 import { Box } from "@mui/material";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import "./pageStyle.scss";
-import { RecipeProps } from "@/types/RecipeProps";
+import "../../styles/scss/recipesListStyle.scss";
+import { useAppSelector } from "@/redux/store";
 
 const RecipesPage = () => {
+  const { loading, randomRecipes } = useAppSelector(
+    (state) => state.apiRecipes
+  );
+
   return (
     <Box className="all-recipes-box">
-      {/* TODO change exampleRecipes to data from API! */}
-      {exampleRecipes.results.map((recipe) => (
-        <RecipeCard recipe={recipe} key={recipe.id} />
-      ))}
+      {loading ? (
+        <div>Loading</div>
+      ) : (
+        randomRecipes.map((recipe) => (
+          <RecipeCard recipe={recipe} key={recipe.id} />
+        ))
+      )}
     </Box>
   );
 };

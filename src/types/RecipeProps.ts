@@ -1,22 +1,13 @@
 import { NutritionProps } from "./NutritionProps";
+import { recipeIngredientProps } from "./RecipeIngredientProps";
 
 export interface RecipeProps {
+  id: number;
   name: string;
-  thumbnail_url: string;
-  cook_time_minutes?: number | null;
-  prep_time_minutes?: number | null;
-  total_time_minutes?: number | null;
-  total_time_tier?: { tier: string } | null;
-  nutrition?: NutritionProps;
-  num_servings?: number;
-  instructions: { id: number; position: number; display_text: string }[];
-  sections:
-    | {
-        components:
-          | {
-              id: number;
-              raw_text: string;
-              ingredient?: { name: string; id: number };
-            }[];
-      }[];
+  image: string;
+  prepTime: number;
+  servings: number;
+  instructions: string;
+  nutrition: NutritionProps;
+  ingredients: recipeIngredientProps[];
 }
