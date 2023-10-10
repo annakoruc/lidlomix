@@ -5,6 +5,6 @@ export const logOut = async () => {
   await signOut(auth)
     .then(() => console.log("Sign out"))
     .catch((error) => {
-      console.log("Sign Out doesynt work" + error.message);
+      console.log("Sign Out doesn't work" + error.message);
     });
 };

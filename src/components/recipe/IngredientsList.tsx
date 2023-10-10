@@ -36,8 +36,8 @@ export const IngredientsList = () => {
     >
       {({ values }) => (
         <Form style={{ display: "flex", flexDirection: "column" }}>
-          {ingredients.map((ingredient) => {
-            const labelId = `checkbox-list-label-${ingredient.id}`;
+          {ingredients.map((ingredient, index) => {
+            const labelId = `checkbox-list-label-${index}`;
             const description = ingredient.displayedText;
 
             return (

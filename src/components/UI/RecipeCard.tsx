@@ -1,44 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useContext } from "react";
-import { Box, Card, IconButton, Typography } from "@mui/material";
-import { RatingComponent } from "./RatingComponent";
-import { IconHeart } from "@/assets";
+import { Box, Card, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
-import { Icon } from "@iconify/react";
-import {
-  addToFavorites,
-  deleteFromFavorites,
-} from "@/redux/features/favoriteRecipesSlice";
+
 import { setCurrentRecipeId } from "@/redux/features/recipeIdSlice";
-import { RecipeProps, shortRecipeProps } from "@/types";
+import { RecipeProps } from "@/types";
+import { AddToFavoriteHeart } from "../recipe";
 
 interface RecipeType {
-  // TODO change type od recipe
   recipe: RecipeProps;
 }
 
 export const RecipeCard = ({ recipe }: RecipeType) => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const isFavoriteRecipe = useAppSelector((state) =>
-    state.favoriteRecipes.recipes.includes(recipe)
-  );
 
   let recipePath = recipe.name.replaceAll(" ", "-");
 
   const setChosenRecipe = () => {
     dispatch(setCurrentRecipeId(recipe.id));
     router.push(`/recipe/${recipePath}`);
-  };
-
-  const setRecipeAsFavorite = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    isFavoriteRecipe
-      ? dispatch(deleteFromFavorites(recipe))
-      : dispatch(addToFavorites(recipe));
   };
 
   return (
@@ -64,18 +48,12 @@ export const RecipeCard = ({ recipe }: RecipeType) => {
         width="100%"
         style={{ borderRadius: 8 }}
       />
-      <IconButton
-        sx={{ position: "absolute", top: 8, right: 8 }}
-        onClick={setRecipeAsFavorite}
-      >
-        <Icon
-          icon="mdi:heart"
-          color={isFavoriteRecipe ? "orange" : "white"}
-          style={{
-            fontSize: 20,
-          }}
-        />
-      </IconButton>
+
+      <AddToFavoriteHeart
+        style={{ position: "absolute", top: 8, right: 8 }}
+        iconSize="20px"
+        recipe={recipe}
+      />
       <Box
         sx={{
           display: "flex",

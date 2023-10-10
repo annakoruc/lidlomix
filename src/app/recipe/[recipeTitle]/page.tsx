@@ -1,19 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-
-import { RecipeBackground } from "@/components";
-import { Box, IconButton, Typography } from "@mui/material";
-
 import { FC, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch, useAppSelector } from "@/redux/store";
+
+import { Box, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
 
-import { InfoCardInRecipe, ScrollableTabs } from "@/components/recipe";
-import { AppDispatch, useAppSelector } from "@/redux/store";
-import { useDispatch } from "react-redux";
+import { RecipeBackground } from "@/components";
 import {
-  addToFavorites,
-  deleteFromFavorites,
-} from "@/redux/features/favoriteRecipesSlice";
+  AddToFavoriteHeart,
+  InfoCardInRecipe,
+  ScrollableTabs,
+} from "@/components/recipe";
 import { getRecipeById } from "@/redux/features/getRecipesFromApiSlice";
 
 interface pageProps {
@@ -22,25 +21,14 @@ interface pageProps {
 
 const Recipe: FC<pageProps> = ({ params }) => {
   const recipeId = useAppSelector((state) => state.recipeId.currentRecipeId);
-  //TODO make custom hook from useDispatch and setRecipesAsFavorite or component with heart button
   const dispatch = useDispatch<AppDispatch>();
   const { loading, currentRecipe } = useAppSelector(
     (state) => state.apiRecipes
-  );
-  const isFavoriteRecipe = useAppSelector((state) =>
-    state.favoriteRecipes.recipes.includes(currentRecipe)
   );
 
   useEffect(() => {
     dispatch(getRecipeById(recipeId));
   }, [dispatch, recipeId]);
-
-  const setRecipeAsFavorite = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    isFavoriteRecipe
-      ? dispatch(deleteFromFavorites(currentRecipe))
-      : dispatch(addToFavorites(currentRecipe));
-  };
 
   return (
     <>
@@ -59,23 +47,16 @@ const Recipe: FC<pageProps> = ({ params }) => {
             style={{ position: "absolute", top: 0, left: 0, zIndex: -3 }}
           />
           <RecipeBackground>
-            <IconButton
-              sx={{
+            <AddToFavoriteHeart
+              style={{
                 position: "absolute",
                 padding: 0,
                 top: "0.5rem",
                 right: "2rem",
               }}
-              onClick={setRecipeAsFavorite}
-            >
-              <Icon
-                icon="mdi:heart"
-                color={isFavoriteRecipe ? "orange" : "white"}
-                style={{
-                  fontSize: 32,
-                }}
-              />
-            </IconButton>
+              iconSize="32px"
+              recipe={currentRecipe}
+            />
 
             <Box sx={{ padding: "38px 32px 0 32px" }}>
               <Typography
