@@ -1,4 +1,4 @@
-## Currently working on the look in figma and add some styling to code
+# MY RECIPES
 
 In the project tab (MyRecipes) you can see my progress, and in issues tabs some of my future tasks.
 
@@ -6,7 +6,16 @@ In the project tab (MyRecipes) you can see my progress, and in issues tabs some 
 
 [Check out how I'm doing(best way mobile e.g Iphone 12 Pro)](https://lidlomix-eight.vercel.app/)
 
-Currenty you can view list of some recipes and show details of choosen recipe.
+## 10.10.2023
+- Changed API with recipes (from Tasty to Spoonacular)
+  * present APi has better documentation and more necessary requests
+- show recipes directly from the API
+- user can add recipes to favorites when they click heart on RecipeCard or directly on the recipe Page
+- show favorites recipes on the Favorites Page (group of recipes Cards)
+- user can add ingredients to the shopping list when checking some ingredients on the ingredients list and clicking the add button below
+- user can delete ingredients from the shopping list after checking some of it
+- user can search recipes on the Search Page by taping some tags or the name of the recipe
+
 
 
 ![allrecipes-mobile](https://github.com/annakoruc/lidlomix/assets/95089940/7365662c-b505-4ca8-9216-0218ef0d1978)
