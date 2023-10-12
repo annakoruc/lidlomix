@@ -50,7 +50,9 @@ export default function RootLayout({
                 },
               })}
             />
-            {location === "/" ? (
+            {location === "/" ||
+            location === "/login" ||
+            location === "/sign-up" ? (
               children
             ) : (
               <Box sx={{ display: "grid", gridTemplateRows: "auto 1fr auto" }}>

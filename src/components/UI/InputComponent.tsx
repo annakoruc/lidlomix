@@ -12,25 +12,24 @@ type InputProps = {
   type: "text" | "password";
 };
 
-export const InputComponent = React.forwardRef(function InputComponent(
-  { placeholder, icon, required, type }: InputProps,
-  ref
-) {
+export const InputComponent = ({
+  placeholder,
+  icon,
+  required,
+  type,
+}: InputProps) => {
   return (
-    <ThemeProvider theme={inputTheme}>
-      <Input
-        id={placeholder}
-        placeholder={placeholder}
-        type={type}
-        ref={ref}
-        color="primary"
-        // variant="standard"
-        startAdornment={
-          <InputAdornment position="start">{icon}</InputAdornment>
-        }
-        required={required}
-        // sx={{ color: "secondary.light", borderBottomColor: "yellow" }}
-      />
-    </ThemeProvider>
+    // <ThemeProvider theme={inputTheme}>
+    <Input
+      id={placeholder}
+      placeholder={placeholder}
+      type={type}
+      color="primary"
+      sx={{ width: "100%" }}
+      startAdornment={<InputAdornment position="start">{icon}</InputAdornment>}
+      required={required}
+      // sx={{ color: "secondary.light", borderBottomColor: "yellow" }}
+    />
+    // </ThemeProvider>
   );
-});
+};

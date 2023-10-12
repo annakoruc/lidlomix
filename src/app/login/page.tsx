@@ -1,56 +1,107 @@
 "use client";
 
 import { loginWithEmail, loginWithGoogle, logOut } from "@/firebase/auth";
-import { getLoggedUser } from "@/firebase/auth/getLoggedUser";
-import { addToUserFavorites } from "@/firebase/database";
-import { getDatabase } from "@/firebase/database/getDataBase";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
-// import "./loginPage.scss";
 import { InputComponent, NavigateButton } from "@/components/UI";
 
 import { IconEmailSvg, IconPasswordSvg } from "@/assets";
 
-import LogoSvg from "@/assets/LogoSvg";
-
 import { BoxFlexComponent } from "@/components/layouts";
+import { Box, Button, Input, InputAdornment } from "@mui/material";
+import { Icon } from "@iconify/react";
+import { Field, Form, Formik } from "formik";
+import { useRouter } from "next/navigation";
+import { themeVariables } from "@/styles/themes/themeVariables";
 
 const LoginPage = () => {
-  const loginEmail = useRef<HTMLInputElement>(null);
-  const loginPassword = useRef<HTMLInputElement>(null);
-
-  // useEffect(() => {
-  //   getRecipeByName("butter");
-  //   getRecipeById("8138");
-  //   getDatabase();
-  //   addToUserFavorites();
-  //   getLoggedUser();
-  // });
-
+  const router = useRouter();
   return (
     <BoxFlexComponent>
-      <label>
-        <InputComponent
-          placeholder="Your email"
-          type="text"
-          icon={<IconEmailSvg color={"black"} />}
-          ref={loginEmail}
-          required
-        />
-        <InputComponent
-          placeholder="Password"
-          type="password"
-          icon={<IconPasswordSvg color={"black"} />}
-          ref={loginPassword}
-          required
-        />
-      </label>
-      <NavigateButton
-        variant="contained"
-        title="Login"
-        onClick={() => loginWithEmail(loginEmail, loginPassword)}
-        href={"/my-profile"}
-      />
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values) => {
+          loginWithEmail(values.email, values.password);
+          router.push(`/my-profile`);
+        }}
+      >
+        {({ values }) => (
+          <Box sx={{ display: "flex", flexDirection: "column", width: "80%" }}>
+            <Form
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "stretch",
+                // width: "80%",
+                gap: "64px",
+              }}
+            >
+              <Box
+                sx={{ display: "flex", flexDirection: "column", gap: "32px" }}
+              >
+                <Field
+                  type="text"
+                  name="email"
+                  as={Input}
+                  sx={{ width: "100%" }}
+                  placeholder="Your email"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <Icon icon="ic:round-mail" style={{ fontSize: "25px" }} />
+                    </InputAdornment>
+                  }
+                  required
+                />
+                <Field
+                  type="password"
+                  name="password"
+                  as={Input}
+                  sx={{ width: "100%" }}
+                  placeholder="Password"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <Icon icon="mdi:password" style={{ fontSize: "25px" }} />
+                    </InputAdornment>
+                  }
+                  required
+                />
+              </Box>
+              <NavigateButton variant="contained" title="Login" type="submit" />
+            </Form>
+            <Box
+              sx={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-between",
+              }}
+            >
+              <Button
+                sx={{
+                  padding: 0,
+                  textTransform: "none",
+                  color: themeVariables.colors.darkblue,
+                }}
+                variant="text"
+                href="/forgot-password"
+              >
+                Forgot password
+              </Button>
+              <Button
+                sx={{
+                  padding: "6px 0",
+                  textTransform: "none",
+                  color: themeVariables.colors.darkblue,
+                }}
+                variant="text"
+                href="/sign-up"
+              >
+                Sign Up
+              </Button>
+            </Box>
+          </Box>
+        )}
+      </Formik>
     </BoxFlexComponent>
   );
 };

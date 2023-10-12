@@ -2,15 +2,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { MutableRefObject } from "react";
 
-export const loginWithEmail = async (
-  email: MutableRefObject<HTMLInputElement | null>,
-  password: MutableRefObject<HTMLInputElement | null>
-) => {
-  await signInWithEmailAndPassword(
-    auth,
-    email.current!.value,
-    password.current!.value
-  )
+export const loginWithEmail = async (email: string, password: string) => {
+  await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
       console.log("User loged in" + user);
