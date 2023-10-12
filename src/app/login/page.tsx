@@ -1,21 +1,19 @@
 "use client";
 
-import { loginWithEmail, loginWithGoogle, logOut } from "@/firebase/auth";
-import { useRef } from "react";
-
-import { InputComponent, NavigateButton } from "@/components/UI";
-
-import { IconEmailSvg, IconPasswordSvg } from "@/assets";
-
-import { BoxFlexComponent } from "@/components/layouts";
-import { Box, Button, Input, InputAdornment } from "@mui/material";
-import { Icon } from "@iconify/react";
-import { Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
+import { Field, Form, Formik } from "formik";
+import { Icon } from "@iconify/react";
+
+import { loginWithEmail } from "@/firebase/auth";
+
+import { Box, Button, Input, InputAdornment } from "@mui/material";
+import { NavigateButton } from "@/components/UI";
+import { BoxFlexComponent } from "@/components/layouts";
 import { themeVariables } from "@/styles/themes/themeVariables";
 
 const LoginPage = () => {
   const router = useRouter();
+
   return (
     <BoxFlexComponent>
       <Formik
@@ -33,7 +31,7 @@ const LoginPage = () => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "stretch",
-                // width: "80%",
+
                 gap: "64px",
               }}
             >

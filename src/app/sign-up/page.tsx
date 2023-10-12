@@ -1,57 +1,81 @@
 "use client";
 
-import { IconEmailSvg, IconPasswordSvg } from "@/assets";
-import { InputComponent, NavigateButton } from "@/components/UI";
+import { NavigateButton } from "@/components/UI";
 import { BoxFlexComponent } from "@/components/layouts";
 import { signUpWithEmail } from "@/firebase/auth";
-import { Box } from "@mui/material";
-import React, { useRef } from "react";
+import { Icon } from "@iconify/react";
+import { Box, Input, InputAdornment } from "@mui/material";
+import { Field, Form, Formik } from "formik";
+import { useRouter } from "next/navigation";
 
 export default function SignUpPage() {
-  const registerEmail = useRef<HTMLInputElement>(null);
-  const registerPassword = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   return (
     <BoxFlexComponent>
-      <Box
-        sx={{
-          minWidth: "270px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 4,
+      <Formik
+        initialValues={{ email: "", password: "", confirmPassword: "" }}
+        onSubmit={(values) => {
+          signUpWithEmail(values.email, values.password);
+          router.push(`/login`);
         }}
       >
-        <InputComponent
-          placeholder="Your email"
-          type="text"
-          icon={<IconEmailSvg color={"black"} />}
-          // ref={loginEmail}
-          required
-        />
-        <InputComponent
-          placeholder="Password"
-          type="password"
-          icon={<IconPasswordSvg color={"black"} />}
-          // ref={loginPassword}
-          required
-        />
-        <InputComponent
-          placeholder="Confirm Password"
-          type="password"
-          icon={<IconPasswordSvg color={"black"} />}
-          // ref={loginPassword}
-          required
-        />
-      </Box>
-
-      <NavigateButton
-        variant="contained"
-        title="Sign Up"
-        onClick={() => {
-          signUpWithEmail(registerEmail, registerPassword);
-        }}
-        href={"/my-profile"}
-      />
+        {({ values }) => (
+          <Form
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "stretch",
+              width: "80%",
+              gap: "64px",
+            }}
+          >
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+              <Field
+                type="text"
+                name="email"
+                as={Input}
+                sx={{ width: "100%" }}
+                placeholder="Your email"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <Icon icon="ic:round-mail" style={{ fontSize: "25px" }} />
+                  </InputAdornment>
+                }
+                required
+              />
+              <Field
+                type="password"
+                name="password"
+                as={Input}
+                sx={{ width: "100%" }}
+                placeholder="Password"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <Icon icon="mdi:password" style={{ fontSize: "25px" }} />
+                  </InputAdornment>
+                }
+                required
+              />
+              <Field
+                type="password"
+                name="confirmPassword"
+                as={Input}
+                sx={{ width: "100%" }}
+                placeholder="confirm Password"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <Icon icon="mdi:password" style={{ fontSize: "25px" }} />
+                  </InputAdornment>
+                }
+                required
+              />
+            </Box>
+            <NavigateButton variant="contained" title="Sign Up" type="submit" />
+          </Form>
+        )}
+      </Formik>
     </BoxFlexComponent>
   );
 }
