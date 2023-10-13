@@ -12,7 +12,7 @@ type NavigateButtonProps = {
   onClick?: () => void;
   sx?: {};
   type?: "submit" | "reset" | "button";
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 export const NavigateButton = ({
