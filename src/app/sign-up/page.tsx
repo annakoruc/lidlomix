@@ -3,8 +3,9 @@
 import { NavigateButton } from "@/components/UI";
 import { BoxFlexComponent } from "@/components/layouts";
 import { signUpWithEmail } from "@/firebase/auth";
+import { SignUpSchema } from "@/schemes";
 import { Icon } from "@iconify/react";
-import { Box, Input, InputAdornment } from "@mui/material";
+import { Box, Input, InputAdornment, TextField } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 
@@ -15,12 +16,13 @@ export default function SignUpPage() {
     <BoxFlexComponent>
       <Formik
         initialValues={{ email: "", password: "", confirmPassword: "" }}
+        validationSchema={SignUpSchema}
         onSubmit={(values) => {
           signUpWithEmail(values.email, values.password);
           router.push(`/login`);
         }}
       >
-        {({ values }) => (
+        {({ touched, errors, isValid, dirty }) => (
           <Form
             style={{
               display: "flex",
@@ -28,51 +30,77 @@ export default function SignUpPage() {
               justifyContent: "center",
               alignItems: "stretch",
               width: "80%",
-              gap: "64px",
+              gap: "48px",
             }}
           >
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <Field
                 type="text"
                 name="email"
-                as={Input}
+                as={TextField}
                 sx={{ width: "100%" }}
-                placeholder="Your email"
-                startAdornment={
-                  <InputAdornment position="start">
+                label={
+                  <Box sx={{ display: "flex", gap: 1 }}>
                     <Icon icon="ic:round-mail" style={{ fontSize: "25px" }} />
-                  </InputAdornment>
+                    Your email
+                  </Box>
                 }
-                required
+                helperText={
+                  touched.email && errors.email ? (
+                    <div>{errors.email}</div>
+                  ) : (
+                    " "
+                  )
+                }
+                error={touched.email && errors.email}
               />
               <Field
                 type="password"
                 name="password"
-                as={Input}
+                as={TextField}
                 sx={{ width: "100%" }}
-                placeholder="Password"
-                startAdornment={
-                  <InputAdornment position="start">
+                label={
+                  <Box sx={{ display: "flex", gap: 1 }}>
                     <Icon icon="mdi:password" style={{ fontSize: "25px" }} />
-                  </InputAdornment>
+                    Password
+                  </Box>
                 }
-                required
+                helperText={
+                  touched.password && errors.password ? (
+                    <div>{errors.password}</div>
+                  ) : (
+                    " "
+                  )
+                }
+                error={touched.password && errors.password}
               />
               <Field
                 type="password"
                 name="confirmPassword"
-                as={Input}
+                as={TextField}
                 sx={{ width: "100%" }}
-                placeholder="confirm Password"
-                startAdornment={
-                  <InputAdornment position="start">
+                label={
+                  <Box sx={{ display: "flex", gap: 1 }}>
                     <Icon icon="mdi:password" style={{ fontSize: "25px" }} />
-                  </InputAdornment>
+                    Confirm Password
+                  </Box>
                 }
-                required
+                helperText={
+                  touched.confirmPassword && errors.password ? (
+                    <div>{errors.confirmPassword}</div>
+                  ) : (
+                    " "
+                  )
+                }
+                error={touched.confirmPassword && errors.confirmPassword}
               />
             </Box>
-            <NavigateButton variant="contained" title="Sign Up" type="submit" />
+            <NavigateButton
+              disabled={!(isValid && dirty)}
+              variant="contained"
+              title="Sign Up"
+              type="submit"
+            />
           </Form>
         )}
       </Formik>
