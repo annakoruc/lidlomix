@@ -4,23 +4,33 @@ import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
 import { Icon } from "@iconify/react";
 
-import { loginWithEmail } from "@/firebase/auth";
-
-import {
-  Box,
-  Button,
-  Input,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { NavigateButton } from "@/components/UI";
 import { BoxFlexComponent } from "@/components/layouts";
 import { themeVariables } from "@/styles/themes/themeVariables";
 import { LoginSchema } from "@/schemes";
+import { auth } from "@/firebase/firebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginPage = () => {
   const router = useRouter();
+
+  const loginWithEmail = async (email: string, password: string) => {
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        if (user.emailVerified) {
+          console.log("User logged in" + user.displayName);
+          router.push("/my-profile");
+        } else {
+          console.log("Account not verified");
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   return (
     <BoxFlexComponent>
@@ -29,7 +39,6 @@ const LoginPage = () => {
         validationSchema={LoginSchema}
         onSubmit={(values) => {
           loginWithEmail(values.email, values.password);
-          router.push(`/my-profile`);
         }}
       >
         {({ errors, touched, isValid, dirty }) => (

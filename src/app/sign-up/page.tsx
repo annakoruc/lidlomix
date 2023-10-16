@@ -2,7 +2,7 @@
 
 import { NavigateButton } from "@/components/UI";
 import { BoxFlexComponent } from "@/components/layouts";
-import { signUpWithEmail } from "@/firebase/auth";
+import { loginWithGoogle, signUpWithEmail } from "@/firebase/auth";
 import { SignUpSchema } from "@/schemes";
 import { Icon } from "@iconify/react";
 import { Box, Input, InputAdornment, TextField } from "@mui/material";
@@ -95,12 +95,26 @@ export default function SignUpPage() {
                 error={touched.confirmPassword && errors.confirmPassword}
               />
             </Box>
-            <NavigateButton
-              disabled={!(isValid && dirty)}
-              variant="contained"
-              title="Sign Up"
-              type="submit"
-            />
+            <Box
+              sx={{
+                width: 1,
+                display: "flex",
+                flexDirection: "column",
+                gap: 3,
+              }}
+            >
+              <NavigateButton
+                disabled={!(isValid && dirty)}
+                variant="contained"
+                title="Sign Up"
+                type="submit"
+              />
+              <NavigateButton
+                variant="contained"
+                title="Login with Google"
+                onClick={() => loginWithGoogle()}
+              />
+            </Box>
           </Form>
         )}
       </Formik>
