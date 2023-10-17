@@ -1,31 +1,76 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
-import { Icon } from "@iconify/react";
+import { Icon as Iconify } from "@iconify/react";
 
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { NavigateButton } from "@/components/UI";
+import { ModalComponent, NavigateButton } from "@/components/UI";
 import { BoxFlexComponent } from "@/components/layouts";
 import { themeVariables } from "@/styles/themes/themeVariables";
 import { SendResetPasswordSchema } from "@/schemes";
 import { auth } from "@/firebase/firebaseConfig";
 import { sendPasswordResetEmail } from "firebase/auth";
 
+import { mdiEmailFastOutline, mdiEmailRemoveOutline } from "@mdi/js";
+import Icon from "@mdi/react";
+
 const ForgotPasswordPage = () => {
   const router = useRouter();
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [modalContent, setModalContent] = useState<React.ReactNode>();
 
   const sendResetLink = async (email: string) => {
     await sendPasswordResetEmail(auth, email)
       .then(() => {
-        console.log("Reset password sent");
-        router.push("/login");
+        openModal(
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 2,
+            }}
+          >
+            <Icon path={mdiEmailFastOutline} size={2} />
+            <Typography>
+              Change password email was sent. Check your email
+            </Typography>
+          </Box>
+        );
+
+        setTimeout(() => router.push(`/login`), 3000);
       })
       .catch((error) => {
-        console.log(error.message);
+        if (error.code === "auth/invalid-email") {
+          openModal(
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 2,
+              }}
+            >
+              <Icon path={mdiEmailRemoveOutline} size={2} />
+              <Typography>invalid email. Try again</Typography>
+            </Box>
+          );
+        } else throw new Error(error.message);
       });
   };
 
+  const openModal = (content: React.ReactNode) => {
+    setModalContent(content);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
   return (
     <BoxFlexComponent>
       <Formik
@@ -56,7 +101,10 @@ const ForgotPasswordPage = () => {
                   sx={{ width: "100%" }}
                   label={
                     <Box sx={{ display: "flex", gap: 1 }}>
-                      <Icon icon="ic:round-mail" style={{ fontSize: "25px" }} />
+                      <Iconify
+                        icon="ic:round-mail"
+                        style={{ fontSize: "25px" }}
+                      />
                       Your email
                     </Box>
                   }
@@ -110,6 +158,9 @@ const ForgotPasswordPage = () => {
           </Box>
         )}
       </Formik>
+      <ModalComponent openedModal={modalIsOpen} onClose={closeModal}>
+        {modalContent}
+      </ModalComponent>
     </BoxFlexComponent>
   );
 };
