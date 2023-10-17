@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
 import { Icon as Iconify } from "@iconify/react";
@@ -15,62 +14,30 @@ import { sendPasswordResetEmail } from "firebase/auth";
 
 import { mdiEmailFastOutline, mdiEmailRemoveOutline } from "@mdi/js";
 import Icon from "@mdi/react";
+import { useModalWithInformation } from "@/hooks/useModalWithInformation";
 
 const ForgotPasswordPage = () => {
   const router = useRouter();
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [modalContent, setModalContent] = useState<React.ReactNode>();
+  const { openModal, closeModal, modalContent, modalIsOpen } =
+    useModalWithInformation();
 
   const sendResetLink = async (email: string) => {
     await sendPasswordResetEmail(auth, email)
       .then(() => {
         openModal(
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 2,
-            }}
-          >
-            <Icon path={mdiEmailFastOutline} size={2} />
-            <Typography>
-              Change password email was sent. Check your email
-            </Typography>
-          </Box>
+          mdiEmailFastOutline,
+          "Change password email was sent. Check your email"
         );
 
         setTimeout(() => router.push(`/login`), 3000);
       })
       .catch((error) => {
         if (error.code === "auth/invalid-email") {
-          openModal(
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 2,
-              }}
-            >
-              <Icon path={mdiEmailRemoveOutline} size={2} />
-              <Typography>invalid email. Try again</Typography>
-            </Box>
-          );
+          openModal(mdiEmailRemoveOutline, "Invalid email. Try again");
         } else throw new Error(error.message);
       });
   };
 
-  const openModal = (content: React.ReactNode) => {
-    setModalContent(content);
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
   return (
     <BoxFlexComponent>
       <Formik

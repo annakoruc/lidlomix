@@ -6,22 +6,27 @@ import { loginWithGoogle } from "@/firebase/auth";
 import { auth } from "@/firebase/firebaseConfig";
 import { SignUpSchema } from "@/schemes";
 import { Icon as Iconify } from "@iconify/react";
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, IconButton, TextField } from "@mui/material";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
 import { Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
-import { mdiEmailRemoveOutline, mdiEmailFastOutline } from "@mdi/js";
+import {
+  mdiEmailRemoveOutline,
+  mdiEmailFastOutline,
+  mdiArrowLeftCircle,
+} from "@mdi/js";
 import Icon from "@mdi/react";
+import { useModalWithInformation } from "@/hooks/useModalWithInformation";
+import { themeVariables } from "@/styles/themes/themeVariables";
 
 export default function SignUpPage() {
   const router = useRouter();
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [modalContent, setModalContent] = useState<React.ReactNode>();
+  const { openModal, closeModal, modalContent, modalIsOpen } =
+    useModalWithInformation();
 
   const signUpWithEmail = async (
     registerEmail: string,
@@ -31,52 +36,18 @@ export default function SignUpPage() {
       .then(() => {
         sendEmailVerification(auth.currentUser!);
         openModal(
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 2,
-            }}
-          >
-            <Icon path={mdiEmailFastOutline} size={2} />
-            <Typography>
-              Verification email was sent. Check your email
-            </Typography>
-          </Box>
+          mdiEmailFastOutline,
+          "Verification email was sent. Check your email"
         );
         setTimeout(() => router.push(`/login`), 3000);
       })
       .catch((error) => {
         if (error.code == "auth/email-already-in-use") {
-          openModal(
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 2,
-              }}
-            >
-              <Icon path={mdiEmailRemoveOutline} size={2} />
-              <Typography>Email busy try another</Typography>
-            </Box>
-          );
+          openModal(mdiEmailRemoveOutline, "Email busy try another");
         } else {
           throw new Error(error.message);
         }
       });
-  };
-
-  const openModal = (content: React.ReactNode) => {
-    setModalContent(content);
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
   };
 
   return (
@@ -182,6 +153,13 @@ export default function SignUpPage() {
                 variant="contained"
                 title="Login with Google"
                 onClick={() => loginWithGoogle()}
+              />
+            </Box>
+            <Box sx={{ cursor: "pointer" }} onClick={() => router.back()}>
+              <Icon
+                path={mdiArrowLeftCircle}
+                size={1}
+                color={"rgba(0, 0, 0, 0.26)"}
               />
             </Box>
           </Form>
