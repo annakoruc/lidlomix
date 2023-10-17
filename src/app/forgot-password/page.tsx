@@ -2,43 +2,49 @@
 
 import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
-import { Icon } from "@iconify/react";
+import { Icon as Iconify } from "@iconify/react";
 
-import { Box, Button, TextField } from "@mui/material";
-import { NavigateButton } from "@/components/UI";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { ModalComponent, NavigateButton } from "@/components/UI";
 import { BoxFlexComponent } from "@/components/layouts";
 import { themeVariables } from "@/styles/themes/themeVariables";
-import { LoginSchema } from "@/schemes";
+import { SendResetPasswordSchema } from "@/schemes";
 import { auth } from "@/firebase/firebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 
-const LoginPage = () => {
+import { mdiEmailFastOutline, mdiEmailRemoveOutline } from "@mdi/js";
+import Icon from "@mdi/react";
+import { useModalWithInformation } from "@/hooks/useModalWithInformation";
+
+const ForgotPasswordPage = () => {
   const router = useRouter();
+  const { openModal, closeModal, modalContent, modalIsOpen } =
+    useModalWithInformation();
 
-  const loginWithEmail = async (email: string, password: string) => {
-    await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+  const sendResetLink = async (email: string) => {
+    await sendPasswordResetEmail(auth, email)
+      .then(() => {
+        openModal(
+          mdiEmailFastOutline,
+          "Change password email was sent. Check your email"
+        );
 
-        if (user.emailVerified) {
-          console.log("User logged in" + user.displayName);
-          router.push("/my-profile");
-        } else {
-          console.log("Account not verified");
-        }
+        setTimeout(() => router.push(`/login`), 3000);
       })
       .catch((error) => {
-        console.log(error.message);
+        if (error.code === "auth/invalid-email") {
+          openModal(mdiEmailRemoveOutline, "Invalid email. Try again");
+        } else throw new Error(error.message);
       });
   };
 
   return (
     <BoxFlexComponent>
       <Formik
-        initialValues={{ email: "", password: "" }}
-        validationSchema={LoginSchema}
+        initialValues={{ email: "" }}
+        validationSchema={SendResetPasswordSchema}
         onSubmit={(values) => {
-          loginWithEmail(values.email, values.password);
+          sendResetLink(values.email);
         }}
       >
         {({ errors, touched, isValid, dirty }) => (
@@ -53,9 +59,8 @@ const LoginPage = () => {
                 gap: "64px",
               }}
             >
-              <Box
-                sx={{ display: "flex", flexDirection: "column", gap: "32px" }}
-              >
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Typography variant="h6">Forgot your password?</Typography>
                 <Field
                   type="text"
                   name="email"
@@ -63,36 +68,27 @@ const LoginPage = () => {
                   sx={{ width: "100%" }}
                   label={
                     <Box sx={{ display: "flex", gap: 1 }}>
-                      <Icon icon="ic:round-mail" style={{ fontSize: "25px" }} />
+                      <Iconify
+                        icon="ic:round-mail"
+                        style={{ fontSize: "25px" }}
+                      />
                       Your email
                     </Box>
                   }
                   helperText={
-                    touched.email && errors.email ? errors.email : " "
+                    touched.email && errors.email ? (
+                      <div>{errors.email}</div>
+                    ) : (
+                      " "
+                    )
                   }
                   error={touched.email && errors.email}
-                />
-                <Field
-                  type="password"
-                  name="password"
-                  as={TextField}
-                  sx={{ width: "100%" }}
-                  label={
-                    <Box sx={{ display: "flex", gap: 1 }}>
-                      <Icon icon="mdi:password" style={{ fontSize: "25px" }} />
-                      Password
-                    </Box>
-                  }
-                  helperText={
-                    touched.password && errors.password ? errors.password : " "
-                  }
-                  error={touched.password && errors.password}
                 />
               </Box>
               <NavigateButton
                 disabled={!(isValid && dirty)}
                 variant="contained"
-                title="Login"
+                title="Send reset link"
                 type="submit"
               />
             </Form>
@@ -110,9 +106,9 @@ const LoginPage = () => {
                   color: themeVariables.colors.darkblue,
                 }}
                 variant="text"
-                href="/forgot-password"
+                href="/login"
               >
-                Forgot password
+                Login
               </Button>
               <Button
                 sx={{
@@ -129,8 +125,11 @@ const LoginPage = () => {
           </Box>
         )}
       </Formik>
+      <ModalComponent openedModal={modalIsOpen} onClose={closeModal}>
+        {modalContent}
+      </ModalComponent>
     </BoxFlexComponent>
   );
 };
 
-export default LoginPage;
+export default ForgotPasswordPage;

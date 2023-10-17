@@ -1,18 +1,17 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { MutableRefObject } from "react";
 
 export const signUpWithEmail = async (
-  registerEmail: MutableRefObject<HTMLInputElement | null>,
-  registerPassword: MutableRefObject<HTMLInputElement | null>
+  registerEmail: string,
+  registerPassword: string
 ) => {
-  await createUserWithEmailAndPassword(
-    auth,
-    registerEmail.current!.value,
-    registerPassword.current!.value
-  )
+  await createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
     .then((userCredential) => {
       const user = userCredential.user;
+      sendEmailVerification(auth.currentUser!);
       console.log("User sign Up" + user);
     })
     .catch((error) => {
