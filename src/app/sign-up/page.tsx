@@ -1,16 +1,83 @@
 "use client";
 
-import { NavigateButton } from "@/components/UI";
+import { ModalComponent, NavigateButton } from "@/components/UI";
 import { BoxFlexComponent } from "@/components/layouts";
-import { loginWithGoogle, signUpWithEmail } from "@/firebase/auth";
+import { loginWithGoogle } from "@/firebase/auth";
+import { auth } from "@/firebase/firebaseConfig";
 import { SignUpSchema } from "@/schemes";
-import { Icon } from "@iconify/react";
-import { Box, Input, InputAdornment, TextField } from "@mui/material";
+import { Icon as Iconify } from "@iconify/react";
+import { Box, TextField, Typography } from "@mui/material";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import { mdiEmailRemoveOutline, mdiEmailFastOutline } from "@mdi/js";
+import Icon from "@mdi/react";
 
 export default function SignUpPage() {
   const router = useRouter();
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [modalContent, setModalContent] = useState<React.ReactNode>();
+
+  const signUpWithEmail = async (
+    registerEmail: string,
+    registerPassword: string
+  ) => {
+    await createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
+      .then(() => {
+        sendEmailVerification(auth.currentUser!);
+        openModal(
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 2,
+            }}
+          >
+            <Icon path={mdiEmailFastOutline} size={2} />
+            <Typography>
+              Verification email was sent. Check your email
+            </Typography>
+          </Box>
+        );
+        setTimeout(() => router.push(`/login`), 3000);
+      })
+      .catch((error) => {
+        if (error.code == "auth/email-already-in-use") {
+          openModal(
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 2,
+              }}
+            >
+              <Icon path={mdiEmailRemoveOutline} size={2} />
+              <Typography>Email busy try another</Typography>
+            </Box>
+          );
+        } else {
+          throw new Error(error.message);
+        }
+      });
+  };
+
+  const openModal = (content: React.ReactNode) => {
+    setModalContent(content);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   return (
     <BoxFlexComponent>
@@ -19,7 +86,6 @@ export default function SignUpPage() {
         validationSchema={SignUpSchema}
         onSubmit={(values) => {
           signUpWithEmail(values.email, values.password);
-          router.push(`/login`);
         }}
       >
         {({ touched, errors, isValid, dirty }) => (
@@ -41,7 +107,10 @@ export default function SignUpPage() {
                 sx={{ width: "100%" }}
                 label={
                   <Box sx={{ display: "flex", gap: 1 }}>
-                    <Icon icon="ic:round-mail" style={{ fontSize: "25px" }} />
+                    <Iconify
+                      icon="ic:round-mail"
+                      style={{ fontSize: "25px" }}
+                    />
                     Your email
                   </Box>
                 }
@@ -61,7 +130,7 @@ export default function SignUpPage() {
                 sx={{ width: "100%" }}
                 label={
                   <Box sx={{ display: "flex", gap: 1 }}>
-                    <Icon icon="mdi:password" style={{ fontSize: "25px" }} />
+                    <Iconify icon="mdi:password" style={{ fontSize: "25px" }} />
                     Password
                   </Box>
                 }
@@ -81,7 +150,7 @@ export default function SignUpPage() {
                 sx={{ width: "100%" }}
                 label={
                   <Box sx={{ display: "flex", gap: 1 }}>
-                    <Icon icon="mdi:password" style={{ fontSize: "25px" }} />
+                    <Iconify icon="mdi:password" style={{ fontSize: "25px" }} />
                     Confirm Password
                   </Box>
                 }
@@ -118,6 +187,9 @@ export default function SignUpPage() {
           </Form>
         )}
       </Formik>
+      <ModalComponent openedModal={modalIsOpen} onClose={closeModal}>
+        {modalContent}
+      </ModalComponent>
     </BoxFlexComponent>
   );
 }

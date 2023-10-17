@@ -9,3 +9,4 @@ export * from "./RecipeCard";
 export * from "./PopupDialog";
 export * from "./IngredientsListForm";
 export * from "./SearchBar";
+export * from "./ModalComponent";

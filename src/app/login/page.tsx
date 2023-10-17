@@ -68,11 +68,7 @@ const LoginPage = () => {
                     </Box>
                   }
                   helperText={
-                    touched.email && errors.email ? (
-                      <div>{errors.email}</div>
-                    ) : (
-                      " "
-                    )
+                    touched.email && errors.email ? errors.email : " "
                   }
                   error={touched.email && errors.email}
                 />
@@ -88,11 +84,7 @@ const LoginPage = () => {
                     </Box>
                   }
                   helperText={
-                    touched.password && errors.password ? (
-                      <div>{errors.password}</div>
-                    ) : (
-                      " "
-                    )
+                    touched.password && errors.password ? errors.password : " "
                   }
                   error={touched.password && errors.password}
                 />
