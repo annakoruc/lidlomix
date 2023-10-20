@@ -2,7 +2,7 @@
 
 import { ModalComponent, NavigateButton } from "@/components/UI";
 import { BoxFlexComponent } from "@/components/layouts";
-import { loginWithGoogle } from "@/firebase/auth";
+import { getLoggedUser, loginWithGoogle } from "@/firebase/auth";
 import { auth } from "@/firebase/firebaseConfig";
 import { SignUpSchema } from "@/schemes";
 import { Icon as Iconify } from "@iconify/react";
@@ -21,7 +21,6 @@ import {
 } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useModalWithInformation } from "@/hooks/useModalWithInformation";
-import { themeVariables } from "@/styles/themes/themeVariables";
 
 export default function SignUpPage() {
   const router = useRouter();

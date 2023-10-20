@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
 import { IconFilter, IconMenu } from "@/assets";
 import { Box } from "@mui/material";
+import { logOut } from "@/firebase/auth";
 
 export const NavMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -39,7 +40,14 @@ export const NavMenu = () => {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            logOut();
+          }}
+        >
+          Logout
+        </MenuItem>
       </Menu>
     </Box>
   );

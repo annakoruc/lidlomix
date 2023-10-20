@@ -53,7 +53,7 @@ export const Navbar = () => {
           </Typography>
           <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
             <Icon icon="ri:search-2-fill" style={{ fontSize: "20px" }} />
-            <Icon icon="fluent:filter-24-filled" style={{ fontSize: "30px" }} />
+            <NavMenu />
           </Box>
         </Toolbar>
       ) : (

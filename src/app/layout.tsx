@@ -1,15 +1,17 @@
 "use client";
 
 import { GlobalTheme } from "@/styles/themes/GlobalTheme";
-import { Footer } from "@/components";
-import { Box, Container, GlobalStyles } from "@mui/material";
+import { Box, GlobalStyles } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import { Provider, useDispatch } from "react-redux";
-import store, { AppDispatch } from "@/redux/store";
+import { Provider } from "react-redux";
+import store from "@/redux/store";
 import { BottomNavigationComponent, Navbar } from "@/components/UI";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { getRandomRecipes } from "@/redux/features/getRecipesFromApiSlice";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/firebase/firebaseConfig";
+import { loggedOutUser, setLoggedUser } from "@/redux/features/loggedUserSlice";
 
 export default function RootLayout({
   children,
@@ -22,6 +24,18 @@ export default function RootLayout({
     store.dispatch(getRandomRecipes());
   }, []);
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        store.dispatch(
+          setLoggedUser({ email: userAuth.email!, uid: userAuth.uid })
+        );
+      } else {
+        store.dispatch(loggedOutUser());
+      }
+    });
+  }, []);
+
   return (
     <html lang="en">
       <head>
@@ -31,6 +45,7 @@ export default function RootLayout({
           content="Application with recipes from tasty API"
         />
       </head>
+
       <body>
         <Provider store={store}>
           <ThemeProvider theme={GlobalTheme}>
