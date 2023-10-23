@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 
 import { Box, Typography } from "@mui/material";
-import { Icon } from "@iconify/react";
 
 import { RecipeBackground } from "@/components";
 import {
@@ -14,6 +13,13 @@ import {
   ScrollableTabs,
 } from "@/components/recipe";
 import { getRecipeById } from "@/redux/features/getRecipesFromApiSlice";
+import {
+  mdiAccountMultiple,
+  mdiChefHat,
+  mdiClockTimeFour,
+  mdiFire,
+} from "@mdi/js";
+import Icon from "@mdi/react";
 
 interface pageProps {
   params: { recipeTitle: string };
@@ -78,17 +84,17 @@ const Recipe: FC<pageProps> = ({ params }) => {
                     currentRecipe.prepTime && `${currentRecipe.prepTime} min`
                   }
                 >
-                  <Icon icon="ion:time" />
+                  <Icon path={mdiClockTimeFour} size={1} />
                 </InfoCardInRecipe>
                 <InfoCardInRecipe text={`${currentRecipe.servings} services`}>
-                  <Icon icon="fluent:people-16-filled" />
+                  <Icon path={mdiAccountMultiple} size={1} />
                 </InfoCardInRecipe>
                 {/* TODO thin about what to add here */}
                 <InfoCardInRecipe text="">
-                  <Icon icon="mdi:cook" />
+                  <Icon path={mdiChefHat} size={1} />
                 </InfoCardInRecipe>
                 <InfoCardInRecipe text={currentRecipe.nutrition.calories}>
-                  <Icon icon="ant-design:fire-filled" />
+                  <Icon path={mdiFire} size={1} />
                 </InfoCardInRecipe>
               </Box>
             </Box>

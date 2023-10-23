@@ -4,7 +4,8 @@ import {
 } from "@/redux/features/favoriteRecipesSlice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { RecipeProps } from "@/types";
-import { Icon } from "@iconify/react";
+import { mdiHeart } from "@mdi/js";
+import Icon from "@mdi/react";
 import { IconButton } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -32,13 +33,7 @@ export const AddToFavoriteHeart = ({
 
   return (
     <IconButton sx={style} onClick={setRecipeAsFavorite}>
-      <Icon
-        icon="mdi:heart"
-        color={isRecipeFavorite ? "orange" : "white"}
-        style={{
-          fontSize: iconSize,
-        }}
-      />
+      <Icon path={mdiHeart} size={1} />
     </IconButton>
   );
 };
