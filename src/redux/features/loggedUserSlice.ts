@@ -6,7 +6,7 @@ import store from "../store";
 
 const initialState: { loading: boolean; user: LoggedUserProps | null } = {
   loading: false,
-  user: { email: "", uid: "" },
+  user: null,
 };
 
 export const setLoggedUser = createAsyncThunk(
