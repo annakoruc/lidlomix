@@ -15,6 +15,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { mdiEmailFastOutline, mdiEmailRemoveOutline } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useModalWithInformation } from "@/hooks/useModalWithInformation";
+import { withPublic } from "@/hooks/route";
 
 const ForgotPasswordPage = () => {
   const router = useRouter();
@@ -132,4 +133,4 @@ const ForgotPasswordPage = () => {
   );
 };
 
-export default ForgotPasswordPage;
+export default withPublic(ForgotPasswordPage);

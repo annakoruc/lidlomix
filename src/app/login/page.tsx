@@ -11,6 +11,7 @@ import { themeVariables } from "@/styles/themes/themeVariables";
 import { LoginSchema } from "@/schemes";
 import { auth } from "@/firebase/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { withPublic } from "@/hooks/route";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -21,7 +22,6 @@ const LoginPage = () => {
         const user = userCredential.user;
 
         if (user.emailVerified) {
-          console.log("User logged in" + user.displayName);
           router.push("/my-profile");
         } else {
           console.log("Account not verified");
@@ -133,4 +133,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default withPublic(LoginPage);

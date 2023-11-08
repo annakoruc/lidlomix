@@ -6,7 +6,7 @@ import { loginWithGoogle } from "@/firebase/auth";
 import { auth } from "@/firebase/firebaseConfig";
 import { SignUpSchema } from "@/schemes";
 import { Icon as Iconify } from "@iconify/react";
-import { Box, IconButton, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
@@ -21,9 +21,9 @@ import {
 } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useModalWithInformation } from "@/hooks/useModalWithInformation";
-import { themeVariables } from "@/styles/themes/themeVariables";
+import { withPublic } from "@/hooks/route";
 
-export default function SignUpPage() {
+function SignUpPage() {
   const router = useRouter();
   const { openModal, closeModal, modalContent, modalIsOpen } =
     useModalWithInformation();
@@ -171,3 +171,5 @@ export default function SignUpPage() {
     </BoxFlexComponent>
   );
 }
+
+export default withPublic(SignUpPage);

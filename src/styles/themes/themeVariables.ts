@@ -23,4 +23,9 @@ export const themeVariables = {
     background: "linear-gradient(180deg, #0C3048 0%, #96CAE7 100%)",
     icons: "linear-gradient(180deg, #96CAE7 0%, #0C3048 100%)",
   },
+
+  heights: {
+    navbar: "80px",
+    bottomNavBar: "56px",
+  },
 };
