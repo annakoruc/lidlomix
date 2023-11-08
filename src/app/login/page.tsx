@@ -11,19 +11,10 @@ import { themeVariables } from "@/styles/themes/themeVariables";
 import { LoginSchema } from "@/schemes";
 import { auth } from "@/firebase/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { getLoggedUser } from "@/firebase/auth";
-import { useAppSelector } from "@/redux/store";
-import { useEffect } from "react";
-import { useIsUserLogged } from "@/hooks/useIsUserLogged";
+import { withPublic } from "@/hooks/route";
 
 const LoginPage = () => {
   const router = useRouter();
-  const userRedux = useAppSelector((store) => store.loggedUser.user);
-  const { checkIfUserIsLogged } = useIsUserLogged();
-
-  useEffect(() => {
-    checkIfUserIsLogged();
-  }, [checkIfUserIsLogged]);
 
   const loginWithEmail = async (email: string, password: string) => {
     await signInWithEmailAndPassword(auth, email, password)
@@ -32,7 +23,6 @@ const LoginPage = () => {
 
         if (user.emailVerified) {
           router.push("/my-profile");
-          console.log("no działa", userRedux);
         } else {
           console.log("Account not verified");
         }
@@ -143,4 +133,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default withPublic(LoginPage);

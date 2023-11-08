@@ -14,17 +14,6 @@ export const setLoggedUser = createAsyncThunk(
   async (user: LoggedUserProps) => {
     console.log("user", user);
     return await user;
-    // await onAuthStateChanged(auth, (userAuth) => {
-    //   if (userAuth) {
-    //     console.log(userAuth.email);
-
-    //     return { email: userAuth.email!, uid: userAuth.uid };
-    //   } else {
-    //     // store.dispatch(loggedOutUser());
-    //     return null;
-    //   }
-    //   // console.log("user", store.getState().loggedUser.user);
-    // });
   }
 );
 
@@ -32,9 +21,6 @@ const loggedUserSlice = createSlice({
   name: "loggedUser",
   initialState,
   reducers: {
-    // setLoggedUser: (state, action: PayloadAction<LoggedUserProps>) => {
-    //   state.user = action.payload;
-    // },
     loggedOutUser: (state) => {
       state.user = null;
     },
