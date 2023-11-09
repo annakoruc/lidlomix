@@ -1,6 +1,5 @@
 import { IconSearch } from "@/assets";
 import { themeVariables } from "@/styles/themes/themeVariables";
-import { Icon } from "@iconify/react";
 import { IconButton, InputBase, Paper } from "@mui/material";
 import { Field } from "formik";
 import React from "react";
