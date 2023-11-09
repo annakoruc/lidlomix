@@ -9,9 +9,6 @@ const RecipesPage = () => {
   const { loading, randomRecipes } = useAppSelector(
     (state) => state.apiRecipes
   );
-  const user = useAppSelector((state) => state.loggedUser.user);
-
-  console.log("no jest user", user);
 
   return (
     <Box className="all-recipes-box">
