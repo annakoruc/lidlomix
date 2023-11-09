@@ -22,8 +22,9 @@ import {
 } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useModalWithInformation } from "@/hooks/useModalWithInformation";
+import { withPublic } from "@/hooks/route";
 
-export default function SignUpPage() {
+function SignUpPage() {
   const router = useRouter();
   const { openModal, closeModal, modalContent, modalIsOpen } =
     useModalWithInformation();
@@ -166,3 +167,5 @@ export default function SignUpPage() {
     </BoxFlexComponent>
   );
 }
+
+export default withPublic(SignUpPage);

@@ -12,6 +12,7 @@ import { auth } from "@/firebase/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { mdiEmail, mdiLock } from "@mdi/js";
 import Icon from "@mdi/react";
+import { withPublic } from "@/hooks/route";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -22,7 +23,6 @@ const LoginPage = () => {
         const user = userCredential.user;
 
         if (user.emailVerified) {
-          console.log("User logged in" + user.displayName);
           router.push("/my-profile");
         } else {
           console.log("Account not verified");
@@ -133,4 +133,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default withPublic(LoginPage);

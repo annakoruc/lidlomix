@@ -1,4 +1,5 @@
 "use client";
+import { NotLoggedUser } from "@/components";
 import { IngredientsListForm, NavigateButton } from "@/components/UI";
 import { TabPanel } from "@/components/recipe";
 import { useAppSelector } from "@/redux/store";
@@ -10,13 +11,14 @@ const ShoppingListPage = () => {
   const shoppingList = useAppSelector(
     (state) => state.shoppingList.recipesList
   );
+  const loggedUser = useAppSelector((store) => store.loggedUser.user);
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
-  return (
+  const content = loggedUser ? (
     <Box sx={{ padding: 0, height: "calc(100% - 66px)", marginBottom: "70px" }}>
       <Tabs
         value={value}
@@ -52,7 +54,11 @@ const ShoppingListPage = () => {
         )}
       </TabPanel>
     </Box>
+  ) : (
+    <NotLoggedUser />
   );
+
+  return content;
 };
 
 export default ShoppingListPage;
