@@ -5,7 +5,6 @@ import { BoxFlexComponent } from "@/components/layouts";
 import { loginWithGoogle } from "@/firebase/auth";
 import { auth } from "@/firebase/firebaseConfig";
 import { SignUpSchema } from "@/schemes";
-import { Icon as Iconify } from "@iconify/react";
 import { Box, TextField } from "@mui/material";
 import {
   createUserWithEmailAndPassword,
@@ -18,6 +17,8 @@ import {
   mdiEmailRemoveOutline,
   mdiEmailFastOutline,
   mdiArrowLeftCircle,
+  mdiEmail,
+  mdiLock,
 } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useModalWithInformation } from "@/hooks/useModalWithInformation";
@@ -78,10 +79,7 @@ function SignUpPage() {
                 sx={{ width: "100%" }}
                 label={
                   <Box sx={{ display: "flex", gap: 1 }}>
-                    <Iconify
-                      icon="ic:round-mail"
-                      style={{ fontSize: "25px" }}
-                    />
+                    <Icon path={mdiEmail} size={1} />
                     Your email
                   </Box>
                 }
@@ -101,8 +99,7 @@ function SignUpPage() {
                 sx={{ width: "100%" }}
                 label={
                   <Box sx={{ display: "flex", gap: 1 }}>
-                    <Iconify icon="mdi:password" style={{ fontSize: "25px" }} />
-                    Password
+                    <Icon path={mdiLock} size={1} /> Password
                   </Box>
                 }
                 helperText={
@@ -121,8 +118,7 @@ function SignUpPage() {
                 sx={{ width: "100%" }}
                 label={
                   <Box sx={{ display: "flex", gap: 1 }}>
-                    <Iconify icon="mdi:password" style={{ fontSize: "25px" }} />
-                    Confirm Password
+                    <Icon path={mdiLock} size={1} /> Confirm Password
                   </Box>
                 }
                 helperText={

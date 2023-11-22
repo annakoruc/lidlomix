@@ -24,7 +24,6 @@ const SearchPage = () => {
         initialValues={{ searchInput: "" }}
         onSubmit={(values) => {
           dispatch(getAutocompleteRecipes(values.searchInput));
-          console.log("works");
         }}
       >
         {(values) => (

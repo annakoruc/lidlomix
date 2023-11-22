@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
-import { Icon } from "@iconify/react";
 
 import { Box, Button, TextField } from "@mui/material";
 import { NavigateButton } from "@/components/UI";
@@ -11,6 +10,8 @@ import { themeVariables } from "@/styles/themes/themeVariables";
 import { LoginSchema } from "@/schemes";
 import { auth } from "@/firebase/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { mdiEmail, mdiLock } from "@mdi/js";
+import Icon from "@mdi/react";
 import { withPublic } from "@/hooks/route";
 
 const LoginPage = () => {
@@ -63,7 +64,7 @@ const LoginPage = () => {
                   sx={{ width: "100%" }}
                   label={
                     <Box sx={{ display: "flex", gap: 1 }}>
-                      <Icon icon="ic:round-mail" style={{ fontSize: "25px" }} />
+                      <Icon path={mdiEmail} size={1} />
                       Your email
                     </Box>
                   }
@@ -79,8 +80,7 @@ const LoginPage = () => {
                   sx={{ width: "100%" }}
                   label={
                     <Box sx={{ display: "flex", gap: 1 }}>
-                      <Icon icon="mdi:password" style={{ fontSize: "25px" }} />
-                      Password
+                      <Icon path={mdiLock} size={1} /> Password
                     </Box>
                   }
                   helperText={

@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
-import { Icon as Iconify } from "@iconify/react";
 
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { ModalComponent, NavigateButton } from "@/components/UI";
@@ -12,7 +11,7 @@ import { SendResetPasswordSchema } from "@/schemes";
 import { auth } from "@/firebase/firebaseConfig";
 import { sendPasswordResetEmail } from "firebase/auth";
 
-import { mdiEmailFastOutline, mdiEmailRemoveOutline } from "@mdi/js";
+import { mdiEmailFastOutline, mdiEmailRemoveOutline, mdiEmail } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useModalWithInformation } from "@/hooks/useModalWithInformation";
 import { withPublic } from "@/hooks/route";
@@ -69,10 +68,7 @@ const ForgotPasswordPage = () => {
                   sx={{ width: "100%" }}
                   label={
                     <Box sx={{ display: "flex", gap: 1 }}>
-                      <Iconify
-                        icon="ic:round-mail"
-                        style={{ fontSize: "25px" }}
-                      />
+                      <Icon path={mdiEmail} size={1} />
                       Your email
                     </Box>
                   }

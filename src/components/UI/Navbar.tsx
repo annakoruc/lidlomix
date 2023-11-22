@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { AppBar, Box, Toolbar, Typography } from "@mui/material";
-import { IconSearch } from "@/assets";
+import { IconFilter, IconSearch } from "@/assets";
 import { NavMenu } from "./NavMenu";
 import { usePathname, useRouter } from "next/navigation";
-import { Icon } from "@iconify/react";
 import { useAppSelector } from "@/redux/store";
+import { mdiArrowLeftCircle } from "@mdi/js";
+import Icon from "@mdi/react";
 
 export const Navbar = () => {
   const [changeNavbar, setChangeNavbar] = useState(false);
@@ -51,10 +52,11 @@ export const Navbar = () => {
           >
             {title.toUpperCase()}
           </Typography>
-          <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-            <Icon icon="ri:search-2-fill" style={{ fontSize: "20px" }} />
-            <NavMenu />
-          </Box>
+          {/* TODO add when implement filter */}
+          {/* <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+            <IconSearch color="white" />
+            <IconFilter />
+          </Box> */}
         </Toolbar>
       ) : (
         <Toolbar
@@ -66,11 +68,9 @@ export const Navbar = () => {
             padding: 3,
           }}
         >
-          <Icon
-            icon="vaadin:arrow-backward"
-            onClick={() => router.back()}
-            style={{ fontSize: "30px" }}
-          />
+          <Box onClick={() => router.back()}>
+            <Icon path={mdiArrowLeftCircle} size={1} />
+          </Box>
           <Box>
             <NavMenu />
           </Box>
