@@ -14,6 +14,11 @@ In the project tab (MyRecipes) you can see my progress, and in the issues tab so
 - control of access to some pages when the user is logged in or logged out (favorite page, shopping list)
 - when the user is logged out, can't add recipes to favorites (the heart button doesn't show)
 
+![favorites-mobile](https://github.com/annakoruc/lidlomix/assets/95089940/caa22ad6-c1d5-4eda-9b81-acad07fac70e)
+![shoppingList-mobil](https://github.com/annakoruc/lidlomix/assets/95089940/f0326281-7736-4374-9b95-d97c468c09e9)
+![loginPage-mobile](https://github.com/annakoruc/lidlomix/assets/95089940/3d3bb9a6-b961-4dc6-8977-f9ae84d7e5d1)
+
+
 ## 10.10.2023
 - Changed API with recipes (from Tasty to Spoonacular)
   * present APi has better documentation and more necessary requests
