@@ -14,11 +14,11 @@ function Home() {
           title="Some recipes"
           variant="contained"
         />
-        {/* <NavigateButton href={"/login"} title="Login" variant="contained" />
-        <NavigateButton href={"/sign-up"} title="Sign Up" variant="outlined" /> */}
+        <NavigateButton href={"/login"} title="Login" variant="contained" />
+        <NavigateButton href={"/sign-up"} title="Sign Up" variant="outlined" />
       </Box>
     </BoxFlexComponent>
   );
 }
 
-export default withPublic(Home);
+export default Home;

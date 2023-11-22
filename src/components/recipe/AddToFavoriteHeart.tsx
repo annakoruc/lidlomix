@@ -3,6 +3,7 @@ import {
   deleteFromFavorites,
 } from "@/redux/features/favoriteRecipesSlice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
+import { themeVariables } from "@/styles/themes/themeVariables";
 import { RecipeProps } from "@/types";
 import { mdiHeart } from "@mdi/js";
 import Icon from "@mdi/react";
@@ -20,6 +21,7 @@ export const AddToFavoriteHeart = ({
   recipe: RecipeProps;
 }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const user = useAppSelector((state) => state.loggedUser.user);
   const isRecipeFavorite = useAppSelector((state) =>
     state.favoriteRecipes.recipes.includes(recipe)
   );
@@ -31,9 +33,21 @@ export const AddToFavoriteHeart = ({
       : dispatch(addToFavorites(recipe));
   };
 
-  return (
+  const content = user ? (
     <IconButton sx={style} onClick={setRecipeAsFavorite}>
-      <Icon path={mdiHeart} size={1} />
+      <Icon
+        path={mdiHeart}
+        size={1}
+        color={
+          isRecipeFavorite
+            ? themeVariables.colors.orange
+            : themeVariables.colors.white
+        }
+      />
     </IconButton>
+  ) : (
+    <p></p>
   );
+
+  return content;
 };

@@ -52,10 +52,11 @@ export const Navbar = () => {
           >
             {title.toUpperCase()}
           </Typography>
-          <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+          {/* TODO add when implement filter */}
+          {/* <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
             <IconSearch color="white" />
             <IconFilter />
-          </Box>
+          </Box> */}
         </Toolbar>
       ) : (
         <Toolbar
@@ -67,7 +68,9 @@ export const Navbar = () => {
             padding: 3,
           }}
         >
-          <Icon path={mdiArrowLeftCircle} size={1} />
+          <Box onClick={() => router.back()}>
+            <Icon path={mdiArrowLeftCircle} size={1} />
+          </Box>
           <Box>
             <NavMenu />
           </Box>

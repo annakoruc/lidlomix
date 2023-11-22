@@ -50,7 +50,13 @@ const Recipe: FC<pageProps> = ({ params }) => {
             }
             alt="image"
             width="100%"
-            style={{ position: "absolute", top: 0, left: 0, zIndex: -3 }}
+            height="40%"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              zIndex: -3,
+            }}
           />
           <RecipeBackground>
             <AddToFavoriteHeart
