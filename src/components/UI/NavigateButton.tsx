@@ -12,6 +12,7 @@ type NavigateButtonProps = {
   onClick?: () => void;
   sx?: {};
   type?: "submit" | "reset" | "button";
+  disabled?: boolean;
 };
 
 export const NavigateButton = ({
@@ -21,6 +22,7 @@ export const NavigateButton = ({
   onClick,
   sx,
   type,
+  disabled,
 }: NavigateButtonProps) => {
   return (
     <ThemeProvider theme={buttonTheme}>
@@ -30,6 +32,7 @@ export const NavigateButton = ({
         variant={variant}
         onClick={onClick}
         sx={sx}
+        disabled={disabled}
       >
         {title}
       </Button>

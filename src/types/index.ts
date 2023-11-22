@@ -6,3 +6,4 @@ export * from "./recipeShoppingListProps";
 export * from "./shoppingListProps";
 export * from "./shortRecipeProps";
 export * from "./RecipeIngredientProps";
+export * from "./LoggedUserProps";

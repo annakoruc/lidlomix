@@ -1,5 +1,5 @@
+import { IconSearch } from "@/assets";
 import { themeVariables } from "@/styles/themes/themeVariables";
-import { Icon } from "@iconify/react";
 import { IconButton, InputBase, Paper } from "@mui/material";
 import { Field } from "formik";
 import React from "react";
@@ -14,13 +14,7 @@ export const SearchBar = ({ name }: { name: string }) => {
         as={InputBase}
       />
       <IconButton type="submit" sx={{ p: "10px" }}>
-        <Icon
-          icon="ri:search-2-fill"
-          style={{
-            fontSize: "20px",
-            color: themeVariables.colors.darkblue,
-          }}
-        />
+        <IconSearch color={themeVariables.colors.darkblue} />
       </IconButton>
     </Paper>
   );

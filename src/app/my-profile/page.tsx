@@ -1,10 +1,10 @@
 "use client";
 
-import { RatingComponent, RecipeCard } from "@/components/UI";
+import { withPrivate } from "@/hooks/route";
 import React from "react";
 
 const MyProfile = () => {
   return <p>My profile</p>;
 };
 
-export default MyProfile;
+export default withPrivate(MyProfile);

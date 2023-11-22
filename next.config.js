@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  // reactStrictMode: true,
   swcMinify: true,
   modularizeImports: {
     "@mui/material/?(((\\w*)?/?)*)": {
@@ -9,12 +9,7 @@ const nextConfig = {
     "@mui/icons-material/?(((\\w*)?/?)*)": {
       transform: "@mui/icons-material/{{ matches.[1] }}/{{member}}",
     },
-    // "@mui/material": {
-    //   transform: "@mui/material/{{member}}",
-    // },
-    // "@mui/icons-material": {
-    //   transform: "@mui/icons-material/{{member}}",
-    // },
+
     "@mui/styles": {
       transform: "@mui/styles/{{member}}",
     },

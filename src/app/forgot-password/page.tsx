@@ -3,28 +3,48 @@
 import { useRouter } from "next/navigation";
 import { Field, Form, Formik } from "formik";
 
-import { Box, Button, TextField } from "@mui/material";
-import { NavigateButton } from "@/components/UI";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { ModalComponent, NavigateButton } from "@/components/UI";
 import { BoxFlexComponent } from "@/components/layouts";
 import { themeVariables } from "@/styles/themes/themeVariables";
-import { LoginSchema } from "@/schemes";
+import { SendResetPasswordSchema } from "@/schemes";
+import { auth } from "@/firebase/firebaseConfig";
+import { sendPasswordResetEmail } from "firebase/auth";
 
-import { mdiEmail, mdiLock } from "@mdi/js";
+import { mdiEmailFastOutline, mdiEmailRemoveOutline, mdiEmail } from "@mdi/js";
 import Icon from "@mdi/react";
+import { useModalWithInformation } from "@/hooks/useModalWithInformation";
 import { withPublic } from "@/hooks/route";
-import { paths } from "@/utils/paths";
-import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 
-const LoginPage = () => {
-  const { loginWithEmail } = useFirebaseAuth();
+const ForgotPasswordPage = () => {
+  const router = useRouter();
+  const { openModal, closeModal, modalContent, modalIsOpen } =
+    useModalWithInformation();
+
+  const sendResetLink = async (email: string) => {
+    await sendPasswordResetEmail(auth, email)
+      .then(() => {
+        openModal(
+          mdiEmailFastOutline,
+          "Change password email was sent. Check your email"
+        );
+
+        setTimeout(() => router.push(`/login`), 3000);
+      })
+      .catch((error) => {
+        if (error.code === "auth/invalid-email") {
+          openModal(mdiEmailRemoveOutline, "Invalid email. Try again");
+        } else throw new Error(error.message);
+      });
+  };
 
   return (
     <BoxFlexComponent>
       <Formik
-        initialValues={{ email: "", password: "" }}
-        validationSchema={LoginSchema}
+        initialValues={{ email: "" }}
+        validationSchema={SendResetPasswordSchema}
         onSubmit={(values) => {
-          loginWithEmail(values.email, values.password);
+          sendResetLink(values.email);
         }}
       >
         {({ errors, touched, isValid, dirty }) => (
@@ -39,9 +59,8 @@ const LoginPage = () => {
                 gap: "64px",
               }}
             >
-              <Box
-                sx={{ display: "flex", flexDirection: "column", gap: "32px" }}
-              >
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <Typography variant="h6">Forgot your password?</Typography>
                 <Field
                   type="text"
                   name="email"
@@ -54,30 +73,19 @@ const LoginPage = () => {
                     </Box>
                   }
                   helperText={
-                    touched.email && errors.email ? errors.email : " "
+                    touched.email && errors.email ? (
+                      <div>{errors.email}</div>
+                    ) : (
+                      " "
+                    )
                   }
                   error={touched.email && errors.email}
-                />
-                <Field
-                  type="password"
-                  name="password"
-                  as={TextField}
-                  sx={{ width: "100%" }}
-                  label={
-                    <Box sx={{ display: "flex", gap: 1 }}>
-                      <Icon path={mdiLock} size={1} /> Password
-                    </Box>
-                  }
-                  helperText={
-                    touched.password && errors.password ? errors.password : " "
-                  }
-                  error={touched.password && errors.password}
                 />
               </Box>
               <NavigateButton
                 disabled={!(isValid && dirty)}
                 variant="contained"
-                title="Login"
+                title="Send reset link"
                 type="submit"
               />
             </Form>
@@ -95,9 +103,9 @@ const LoginPage = () => {
                   color: themeVariables.colors.darkblue,
                 }}
                 variant="text"
-                href="/forgot-password"
+                href="/login"
               >
-                Forgot password
+                Login
               </Button>
               <Button
                 sx={{
@@ -114,8 +122,11 @@ const LoginPage = () => {
           </Box>
         )}
       </Formik>
+      <ModalComponent openedModal={modalIsOpen} onClose={closeModal}>
+        {modalContent}
+      </ModalComponent>
     </BoxFlexComponent>
   );
 };
 
-export default withPublic(LoginPage);
+export default withPublic(ForgotPasswordPage);

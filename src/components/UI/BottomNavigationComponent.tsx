@@ -9,11 +9,9 @@ import {
 } from "@/assets";
 import { BottomNavButtonsProps } from "@/types/BottomNavButtonsProps";
 import { useRouter } from "next/navigation";
-import { Icon } from "@iconify/react";
-import { themeVariables } from "@/styles/themes/themeVariables";
-import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { setCurrentPageTitle } from "@/redux/features/pageTitleSlice";
+import { useDispatch } from "react-redux";
 
 const bottomNavButtons: BottomNavButtonsProps = [
   {
@@ -21,35 +19,35 @@ const bottomNavButtons: BottomNavButtonsProps = [
     title: "All recipes",
     label: "Recipes",
     value: "recipes",
-    icon: <Icon icon="material-symbols:cookie-rounded" />,
+    icon: <IconRecipes />,
   },
   {
     id: "2B",
     title: "Search recipes",
     label: "Search",
     value: "search",
-    icon: <Icon icon="ri:search-2-fill" />,
+    icon: <IconSearch />,
   },
   {
     id: "3B",
     title: "Favorites recipes",
     label: "Favorites",
     value: "favorites",
-    icon: <Icon icon="mdi:book-favorite" />,
+    icon: <IconFavorites />,
   },
   {
     id: "4B",
     title: "Shopping list",
     label: "List",
     value: "shopping-list",
-    icon: <Icon icon="ri:file-list-3-fill" />,
+    icon: <IconList />,
   },
   {
     id: "5B",
     title: "Calender",
     label: "Calender",
     value: "calender",
-    icon: <Icon icon="fluent:calendar-28-filled" />,
+    icon: <IconCalender />,
   },
 ];
 export const BottomNavigationComponent = () => {

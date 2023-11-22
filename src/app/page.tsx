@@ -3,8 +3,9 @@
 import { NavigateButton } from "@/components/UI";
 import { Box } from "@mui/material";
 import { BoxFlexComponent } from "@/components/layouts";
+import { withPublic } from "@/hooks/route";
 
-export default function Home() {
+function Home() {
   return (
     <BoxFlexComponent>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
@@ -13,9 +14,11 @@ export default function Home() {
           title="Some recipes"
           variant="contained"
         />
-        {/* <NavigateButton href={"/login"} title="Login" variant="contained" />
-        <NavigateButton href={"/sign-up"} title="Sign Up" variant="outlined" /> */}
+        <NavigateButton href={"/login"} title="Login" variant="contained" />
+        <NavigateButton href={"/sign-up"} title="Sign Up" variant="outlined" />
       </Box>
     </BoxFlexComponent>
   );
 }
+
+export default Home;
