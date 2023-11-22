@@ -57,6 +57,9 @@ export const Navbar = () => {
             <IconSearch color="white" />
             <IconFilter />
           </Box> */}
+          <Box>
+            <NavMenu />
+          </Box>
         </Toolbar>
       ) : (
         <Toolbar
