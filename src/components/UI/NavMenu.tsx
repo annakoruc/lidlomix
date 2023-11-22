@@ -2,17 +2,17 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Image from "next/image";
-import { IconFilter, IconMenu } from "@/assets";
+import { IconMenu } from "@/assets";
 import { Box } from "@mui/material";
-import { logOut } from "@/firebase/auth";
 import { useAppSelector } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { paths } from "@/utils/paths";
+import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 
 export const NavMenu = () => {
   const [open, setOpen] = React.useState<null | HTMLElement>(null);
   const { user } = useAppSelector((store) => store.loggedUser);
+  const { logOut } = useFirebaseAuth();
   const router = useRouter();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

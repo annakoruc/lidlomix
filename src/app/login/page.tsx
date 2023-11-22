@@ -8,30 +8,15 @@ import { NavigateButton } from "@/components/UI";
 import { BoxFlexComponent } from "@/components/layouts";
 import { themeVariables } from "@/styles/themes/themeVariables";
 import { LoginSchema } from "@/schemes";
-import { auth } from "@/firebase/firebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+
 import { mdiEmail, mdiLock } from "@mdi/js";
 import Icon from "@mdi/react";
 import { withPublic } from "@/hooks/route";
+import { paths } from "@/utils/paths";
+import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 
 const LoginPage = () => {
-  const router = useRouter();
-
-  const loginWithEmail = async (email: string, password: string) => {
-    await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-
-        if (user.emailVerified) {
-          router.push("/my-profile");
-        } else {
-          console.log("Account not verified");
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
+  const { loginWithEmail } = useFirebaseAuth();
 
   return (
     <BoxFlexComponent>

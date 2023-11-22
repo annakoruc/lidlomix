@@ -12,7 +12,7 @@ const initialState: { loading: boolean; user: LoggedUserProps | null } = {
 export const setLoggedUser = createAsyncThunk(
   "user/logged",
   async (user: LoggedUserProps) => {
-    console.log("user", user);
+    // console.log("user", user);
     return await user;
   }
 );

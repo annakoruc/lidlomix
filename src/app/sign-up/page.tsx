@@ -2,54 +2,22 @@
 
 import { ModalComponent, NavigateButton } from "@/components/UI";
 import { BoxFlexComponent } from "@/components/layouts";
-import { loginWithGoogle } from "@/firebase/auth";
-import { auth } from "@/firebase/firebaseConfig";
 import { SignUpSchema } from "@/schemes";
 import { Box, TextField } from "@mui/material";
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-} from "firebase/auth";
+
 import { Field, Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 
-import {
-  mdiEmailRemoveOutline,
-  mdiEmailFastOutline,
-  mdiArrowLeftCircle,
-  mdiEmail,
-  mdiLock,
-} from "@mdi/js";
+import { mdiArrowLeftCircle, mdiEmail, mdiLock } from "@mdi/js";
 import Icon from "@mdi/react";
 import { useModalWithInformation } from "@/hooks/useModalWithInformation";
 import { withPublic } from "@/hooks/route";
+import { useFirebaseAuth } from "@/hooks/useFirebaseAuth";
 
 function SignUpPage() {
   const router = useRouter();
-  const { openModal, closeModal, modalContent, modalIsOpen } =
-    useModalWithInformation();
-
-  const signUpWithEmail = async (
-    registerEmail: string,
-    registerPassword: string
-  ) => {
-    await createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
-      .then(() => {
-        sendEmailVerification(auth.currentUser!);
-        openModal(
-          mdiEmailFastOutline,
-          "Verification email was sent. Check your email"
-        );
-        setTimeout(() => router.push(`/login`), 3000);
-      })
-      .catch((error) => {
-        if (error.code == "auth/email-already-in-use") {
-          openModal(mdiEmailRemoveOutline, "Email busy try another");
-        } else {
-          throw new Error(error.message);
-        }
-      });
-  };
+  const { closeModal, modalContent, modalIsOpen } = useModalWithInformation();
+  const { loginWithGoogle, signUpWithEmail } = useFirebaseAuth();
 
   return (
     <BoxFlexComponent>
